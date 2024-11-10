@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Applied Status</title>
+</head>
+<body>
+  <h2>Applied Status</h2>
+  <div id="appliedStatusList"></div>
+
+  <script src="firebase-config.js"></script>
+  <script>
+    function loadAppliedStatus() {
+      const userId = "studentID";
+      db.collection("applications").where("studentId", "==", userId).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const application = doc.data();
+          document.getElementById("appliedStatusList").innerHTML += `<p>Company ID: ${application.companyId} - Status: ${application.status}</p>`;
+        });
+      });
+    }
+
+    loadAppliedStatus();
+  </script>
+</body>
+</html>

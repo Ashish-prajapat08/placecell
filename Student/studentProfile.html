@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      background-color: #ebebeb;
+    }
+    /* Sidebar styling */
+    .sidebar {
+      width: 200px;
+      background-color: #a8bdfa;
+      color: #ecf0f1;
+      padding-top: 20px;
+      position: fixed;
+      height: 100%;
+      margin-right: 500px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 15px;
+      color: #ecf0f1;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background-color:  #4ca3ff;
+      border-radius: 20px;
+    }
+    /* Main content styling */
+    .main-content {
+      margin-left: 20px;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      border-radius: 30px;
+      margin-right: 20px;
+      background-color:white ;
+      /* width: calc(100% - 200px); */
+    }
+    .profile-container {
+  display: flex;
+  width: 500px;
+  height: 20%;
+  margin-left: 15%;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  justify-content: center; /* Added to center horizontally */
+  align-items: center; /* Added to center vertically */
+}
+    /* Profile image section */
+    .profile-image-section {
+  display: flex; /* Make it a flex container */
+  flex-direction: column; /* Arrange items vertically */
+  justify-content: center;
+  align-items: center;
+}
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      margin-bottom: 15px;
+     text-align: justify;
+     margin-top: 8px;
+      
+    }
+    .profile-image-section h2 {
+      font-size: 1.2em;
+      color: #34495e;
+    margin-left: 5px;
+    padding: 1px;
+    align-items: center;
+    }
+    /* Profile details section */
+    .profile-details {
+      width: 70%;
+      padding-left: 20px;
+    }
+    .profile-details label {
+      font-weight: bold;
+      color: #34495e;
+      display: block;
+      margin-top: 10px;
+    }
+    .profile-details input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .update-button {
+      background-color: #2980b9;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .update-button:hover {
+      background-color: #3498db;
+    }
+    .headd{
+    /* justify-content: center; */
+    /* margin-left: 30px; */
+      color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- <a href="otherpages/Homepage.html">Home</a> -->
+    <a href="studentProfile.html">Add Student</a>
+    <a href="viewStudent.html">View Student</a>
+    <a href="companyList.html">Company List</a>
+    <a href="appliedStatus.html">Applied Status</a>
+    <a href="../otherpages/Homepage.html">Logout</a>
+  </div>
+
+  <div class="profile-container">
+    <!-- Profile Image and Basic Info -->
+    <div class="profile-image-section">
+     <img src="6833591.png" alt="" class="profile-image">
+      <h2>Anushka Saratkar</h2>
+      <h2>CSIT</h2>
+      <h2>2026</h2>
+    </div>
+    </div>
+  <!-- Main content -->
+  <div class="main-content">
+    <h2 class="headd">Student Profile</h2>
+      <!-- Profile Details Form -->
+      <div class="profile-details" id="profile">
+        <label>Name:</label>
+        <input type="text" id="name">
+
+        <label>College ID:</label>
+        <input type="text" id="collegeId">
+
+        <label>Degree:</label>
+        <input type="text" id="degree">
+
+        <label>Branch:</label>
+        <input type="text" id="branch">
+
+        <label>Email:</label>
+        <input type="email" id="email">
+
+        <label>Contact:</label>
+        <input type="text" id="contact">
+
+        <label>CGPA:</label>
+        <input type="text" id="cgpa">
+
+        <label>Active Backlogs:</label>
+        <input type="text" id="backlogs">
+
+        <label>10th Percentage:</label>
+        <input type="text" id="tenthPercentage">
+
+        <label>12th Percentage:</label>
+        <input type="text" id="twelfthPercentage">
+
+        <label>10th Board:</label>
+        <input type="text" id="tenthBoard">
+
+        <label>12th Board:</label>
+        <input type="text" id="twelfthBoard">
+
+        <label>Address:</label>
+        <input type="text" id="address">
+
+        <label>City:</label>
+        <input type="text" id="city">
+
+        <label>LinkedIn Profile:</label>
+        <input type="url" id="linkedinProfile">
+
+        <label>Resume:</label>
+        <input type="file" id="resume">
+
+        <button class="update-button" onclick="updateProfile()">Update Profile</button>
+      </div>
+    </div>
+  
+
+  <script src="firebase-config.js"></script>
+  <script>
+    // Fetch current student data from Firestore
+    function loadProfile() {
+      const userId = "studentID"; // Example user ID
+      db.collection("students").doc(userId).get().then((doc) => {
+        if (doc.exists) {
+          document.getElementById("name").value = doc.data().name;
+          document.getElementById("collegeId").value = doc.data().collegeId;
+          document.getElementById("degree").value = doc.data().degree;
+          document.getElementById("branch").value = doc.data().branch;
+          document.getElementById("email").value = doc.data().email;
+          document.getElementById("contact").value = doc.data().contact;
+          document.getElementById("cgpa").value = doc.data().cgpa;
+          document.getElementById("backlogs").value = doc.data().backlogs;
+          document.getElementById("tenthPercentage").value = doc.data().tenthPercentage;
+          document.getElementById("twelfthPercentage").value = doc.data().twelfthPercentage;
+          document.getElementById("tenthBoard").value = doc.data().tenthBoard;
+          document.getElementById("twelfthBoard").value = doc.data().twelfthBoard;
+          document.getElementById("address").value = doc.data().address;
+          document.getElementById("city").value = doc.data().city;
+          document.getElementById("linkedinProfile").value = doc.data().linkedinProfile;
+        }
+      });
+    }
+
+    function updateProfile() {
+      const userId = "studentID"; // Example user ID
+      db.collection("students").doc(userId).set({
+        name: document.getElementById("name").value,
+        collegeId: document.getElementById("collegeId").value,
+        degree: document.getElementById("degree").value,
+        branch: document.getElementById("branch").value,
+        email: document.getElementById("email").value,
+        contact: document.getElementById("contact").value,
+        cgpa: document.getElementById("cgpa").value,
+        backlogs: document.getElementById("backlogs").value,
+        tenthPercentage: document.getElementById("tenthPercentage").value,
+        twelfthPercentage: document.getElementById("twelfthPercentage").value,
+        tenthBoard: document.getElementById("tenthBoard").value,
+        twelfthBoard: document.getElementById("twelfthBoard").value,
+        address: document.getElementById("address").value,
+        city: document.getElementById("city").value,
+        linkedinProfile: document.getElementById("linkedinProfile").value,
+      }).then(() => {
+        alert("Profile updated successfully!");
+        window.location.href = "view-student.html"; // Redirect to view student page
+      }).catch((error) => {
+        console.error("Error updating profile:", error);
+      });
+    }
+
+    loadProfile(); // Call on page load
+  </script>
+</body>
+</html>

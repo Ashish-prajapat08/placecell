@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Company List</title>
+</head>
+<body>
+  <h2>Company List</h2>
+  <div id="companyList"></div>
+
+  <script src="firebase-config.js"></script>
+  <script>
+    function loadCompanies() {
+      db.collection("companies").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const company = doc.data();
+          document.getElementById("companyList").innerHTML += `
+            <div>
+              <h3>${company.name}</h3>
+              <p>${company.description}</p>
+              <button onclick="apply('${doc.id}')">Apply</button>
+            </div>
+          `;
+        });
+      });
+    }
+
+    function apply(companyId) {
+      const userId = "studentID"; // Example user ID
+      db.collection("applications").add({
+        studentId: userId,
+        companyId: companyId,
+        status: "Applied"
+      }).then(() => {
+        alert("Applied successfully!");
+      });
+    }
+
+    loadCompanies();
+  </script>
+</body>
+</html>

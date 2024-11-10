@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register as Student</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+      
+      .container { margin: 10px ; margin-right: 25%;margin-left: 25%; padding: 10px; background-color: #828cec; border-radius: 30px;}
+      label { display: flex; margin: 4px 15px 5px; }
+      input[type="text"], input[type="email"], input[type="password"] {
+          width: 60%; padding: 10px; margin: 8px 0; border-radius: 10px; 
+      }
+      button { padding: 8px 15px; font-size: 16px; cursor: pointer; background-color: #263bf4; color: white; border-radius: 10px; }
+      .header { display: flex; align-items: center; }
+      .imgs { max-height: 70px; margin-right: 10px; }
+      .cont{
+          background-color: rgb(255, 255, 255); border-radius: 10px; margin-right: 70px;padding: inherit;margin-left: 55px;}
+          .ips{
+              color: rgb(234, 246, 255); text-align: center;
+          }
+          h2{
+              text-align: center;
+          }
+    </style>
+ </head>
+ <body>
+    <div class="container">
+        <div class="header">
+            <img src="logo.png" alt="" class="imgs">
+            <h2>Welcome to IPS Academy Placement Portal</h2>
+        </div>
+        <h3 class="ips">COMPANY LOGIN</h3>
+        <form class="cont">
+            <label for="name">Admin</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+
+            <button type="button" onclick="redirectToaddCompany()">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function redirectToaddCompany() {
+            alert("Registration successful! Redirecting to Company Registration.");
+            window.location.href = "../company/addCompany.html";
+        }
+    </script>
+ </body>
+</html>

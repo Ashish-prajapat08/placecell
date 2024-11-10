@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPS Academy Placement Cell</title>
+  <style>
+    /* Basic Styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    /* Header Section */
+    header {
+      background-color: #0056a4;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    /* Navbar Styling */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #004080;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+    }
+
+    nav a:hover {
+      background-color: #0c5cac;
+      border-radius: 5px;
+    }
+
+    /* Placement Stats Section */
+    .stats-section {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .branch-stats {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      text-align: center;
+    }
+
+    /* Login Button */
+    .login-button {
+      display: inline-block;
+      padding: 10px 20px;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 20px 0;
+      text-decoration: none;
+    }
+
+    /* Contact Us Section */
+    .contact-section {
+      background-color: #0056a4;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .contact-section h3 {
+      margin-top: 0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #004080;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    .dropdown{
+        background-color:#4e9ae6;
+        padding: 5px 10px;
+        text-align: center;
+    }
+    .drpdwn{
+        color: #000000;
+        background-color: #f4f4f9;
+    }
+    .flex-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .imgg{
+        height: 100px;
+        width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <header class="meri">
+    <div class="flex-container">
+        <img src="logo.png" alt="IPS Academy Logo" class="imgg">
+        <h1 class="imgcls">IPS Academy Placement Cell</h1>
+    </div>
+  </header>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="notifications.html">Notifications</a>
+    <a href="otherpages/contact.html">Contact Us</a>
+    <a href="../otherpages/developer.html">Developer</a>
+    <a href="../login/registerStudent.html">Login as Student</a>
+    <a href="../login/registerCompany.html" class="login-button">Login as Company</a>
+  </nav>
+
+  <!-- Placement Stats Section -->
+  <div class="stats-section">
+    <h2>Placement Status 
+      <select class="dropdown" id="batchDropdown" onchange="updateStatistics()">
+          <option value="2022-23">Batch 2022-23</option>
+          <option value="2023-24">Batch 2023-24</option>
+      </select>
+    </h2> 
+    
+    <p>Below are the placement statistics for different branches at IPS Academy.</p>
+    
+    <div class="stats-container" id="statsContainer">
+      <!-- Branch-wise stats cards (Default content) -->
+      <div class="branch-stats">
+        <h3>Computer Science</h3>
+        <p>Placed: 120 / 150</p>
+      </div>
+      <div class="branch-stats">
+        <h3>Information Technology</h3>
+        <p>Placed: 90 / 120</p>
+      </div>
+      <div class="branch-stats">
+        <h3>Mechanical Engineering</h3>
+        <p>Placed: 60 / 100</p>
+      </div>
+      <div class="branch-stats">
+        <h3>Electronics & Communication</h3>
+        <p>Placed: 80 / 110</p>
+      </div>
+      <div class="branch-stats">
+        <h3>Civil Engineering</h3>
+        <p>Placed: 45 / 90</p>
+      </div>
+      <div class="branch-stats">
+        <h3>Electronics</h3>
+        <p>Placed: 65 / 100</p>
+      </div>
+      <div class="branch-stats">
+        <h3>B.Arch</h3>
+        <p>Placed: 55 / 100</p>
+      </div>
+      <div class="branch-stats">
+        <h3>Biotechnology</h3>
+        <p>Placed: 78 / 100</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Us Section -->
+  <div class="contact-section" id="contact">
+    <p>Address: IPS Academy, A.B. Road, Indore</p>
+    <p>Phone: +91 12345 67890</p>
+    <p>Email: placement@ipsacademy.org</p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 IPS Academy Placement Cell</p>
+  </footer>
+
+  <script>
+    function updateStatistics() {
+      const batch = document.getElementById("batchDropdown").value;
+      const statsContainer = document.getElementById("statsContainer");
+      
+      if (batch === "2022-23") {
+        statsContainer.innerHTML = `
+          <div class="branch-stats"><h3>Computer Science</h3><p>Placed: 120 / 150</p></div>
+          <div class="branch-stats"><h3>Information Technology</h3><p>Placed: 90 / 120</p></div>
+          <div class="branch-stats"><h3>Mechanical Engineering</h3><p>Placed: 60 / 100</p></div>
+          <div class="branch-stats"><h3>Electronics & Communication</h3><p>Placed: 80 / 110</p></div>
+          <div class="branch-stats"><h3>Civil Engineering</h3><p>Placed: 45 / 90</p></div>
+          <div class="branch-stats"><h3>Electronics</h3><p>Placed: 65 / 100</p></div>
+          <div class="branch-stats"><h3>B.Arch</h3><p>Placed: 55 / 100</p></div>
+          <div class="branch-stats"><h3>Biotechnology</h3><p>Placed: 78 / 100</p></div>`;
+      } else if (batch === "2023-24") {
+        statsContainer.innerHTML = `
+          <div class="branch-stats"><h3>Computer Science</h3><p>Placed: 130 / 160</p></div>
+          <div class="branch-stats"><h3>Information Technology</h3><p>Placed: 95 / 130</p></div>
+          <div class="branch-stats"><h3>Mechanical Engineering</h3><p>Placed: 70 / 110</p></div>
+          <div class="branch-stats"><h3>Electronics & Communication</h3><p>Placed: 85 / 115</p></div>
+          <div class="branch-stats"><h3>Civil Engineering</h3><p>Placed: 50 / 95</p></div>
+          <div class="branch-stats"><h3>Electronics</h3><p>Placed: 68 / 105</p></div>
+          <div class="branch-stats"><h3>B.Arch</h3><p>Placed: 60 / 105</p></div>
+          <div class="branch-stats"><h3>Biotechnology</h3><p>Placed: 82 / 105</p></div>`;
+      }
+    }
+  </script>
+
+</body>
+</html>

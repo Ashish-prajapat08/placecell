@@ -1,0 +1,27 @@
+{
+  "name": "placecellips",
+  "version": "1.0.0",
+  "description": "Just a placement cell",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashish-prajapat08/placecell.git"
+  },
+  "author": "Aryan, Ashish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ashish-prajapat08/placecell/issues"
+  },
+  "homepage": "https://github.com/Ashish-prajapat08/placecell#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.10",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.21.1",
+    "node": "^22.11.0"
+  }
+}

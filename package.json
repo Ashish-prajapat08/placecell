@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Ashish-prajapat08/placecell#readme",
   "dependencies": {
     "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",

@@ -32,25 +32,26 @@
             <h2>Welcome to IPS Academy Placement Portal</h2>
         </div>
         <h3 class="ips">IPS ACADEMY PLACEMENT PORTAL LOGIN</h3>
-        <form class="cont">
+        <form class="cont" method="post" action="/login/student">
             <label for="name">Computer Code</label>
-            <input type="text" id="name" placeholder="Enter your computer code" required>
+            <input type="text" id="computerCode" placeholder="Enter your computer code" name="computerCode" required>
 
             <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" required>
+            <input type="email" id="email" placeholder="Enter your email" name="email" required>
 
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter a password" required>
+            <input type="password" id="password" placeholder="Enter a password" name="password" required>
 
-            <button type="button" onclick="redirectToStudentLogin()">Login</button>
+            <button type="submit">Login</button>
         </form>
     </div>
-
+    <!-- No need of this using in the post inbuilt on the form  -->
+<!-- 
     <script>
         function redirectToStudentLogin() {
-            alert("Registration successful! Redirecting to student profile page.");
-            window.location.href = "../Student/studentProfile.html";
+            alert("Welcome login success!!!! Redirecting to student profile page.");
+            window.location.href = "";
         }
-    </script>
+    </script> -->
  </body>
 </html>

@@ -55,9 +55,14 @@ app.post('/login/student',async(req,res)=>{
 
     // yaha pe present h matlab ki auth and password verify ho gye h so 
     // redirect krdo studentProfile k upar 
-    res.send('hahaha')
+    res.render('studentProfile',{user})
 })
 
+
+app.post('/studentProfile',(req,res)=>{
+    console.log(req.body);
+    res.send("it hitted ")
+})
 
 
 // The one time use code for creating in the users and ids

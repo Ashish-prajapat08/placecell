@@ -139,12 +139,13 @@
   <div class="main-content">
     <h2 class="headd">Student Profile</h2>
       <!-- Profile Details Form -->
+       <form action="/studentProfile" method="post">
       <div class="profile-details" id="profile">
         <label>Name:</label>
         <input type="text" id="name">
 
         <label>College ID:</label>
-        <input type="text" id="collegeId">
+        <input type="text" id="collegeId" value="<%= user.computerCode %>">
 
         <label>Degree:</label>
         <input type="text" id="degree">
@@ -153,7 +154,7 @@
         <input type="text" id="branch">
 
         <label>Email:</label>
-        <input type="email" id="email">
+        <input type="email" id="email" value="<%= user.email %>">
 
         <label>Contact:</label>
         <input type="text" id="contact">
@@ -185,10 +186,15 @@
         <label>LinkedIn Profile:</label>
         <input type="url" id="linkedinProfile">
 
-        <label>Resume:</label>
-        <input type="file" id="resume">
+        <!-- <label>Resume:</label>
+        <input type="file" id="resume"> -->
 
-        <button class="update-button" onclick="updateProfile()">Update Profile</button>
+        <label>Resume URL:</label>
+        <input type="text" id="resume" placeholder="Enter resume URL or path">
+
+
+        <button class="update-button" type="submit">Create Profile</button>
+      </form>
       </div>
     </div>
   

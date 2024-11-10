@@ -5,7 +5,7 @@ const ejsMate = require('ejs-mate')
 const path = require('path')
 const axios = require('axios')
 const cors = require("cors");
-
+const connectDB = require("./utils/connectionDB")
 
 
 // Middlewares here please  

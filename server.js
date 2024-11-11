@@ -38,7 +38,7 @@ app.get('/',(req,res)=>{
 
 
 // Route 2
-app.get('/loginStudent',(req,res)=>{
+app.get('/loginStudent',(req,res)=>{ 
     // res.send("Home page");
     res.render('registerStudent.ejs')
 })

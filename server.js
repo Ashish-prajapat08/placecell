@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 // Including in the userModel in it here 
 const User = require('./models/userDetails')
 const Company = require('./models/companyDetails')
+const StudentDetails = require('./models/studentDetails')
 
 // Middlewares here please  
 app.engine('ejs',ejsMate)
@@ -59,9 +60,16 @@ app.post('/login/student',async(req,res)=>{
 })
 
 
-app.post('/studentProfile',(req,res)=>{
+app.post('/studentProfile',async(req,res)=>{
     console.log(req.body);
-    res.send("it hitted ")
+
+    
+    const student = new StudentDetails(req.body);
+    await student.save();
+//   res.send("Saving of the user is successfull")
+
+
+    res.send("Saved the student details successfully")
 })
 
 

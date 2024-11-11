@@ -8,10 +8,15 @@ const cors = require("cors");
 const connectDB = require("./utils/connectionDB")
 const bodyParser = require('body-parser');
 
+
 // Including in the userModel in it here 
 const User = require('./models/userDetails')
 const Company = require('./models/companyDetails')
 const StudentDetails = require('./models/studentDetails')
+
+
+//My unique id carrier jugaad 
+let userIdCarrier = '';
 
 // Middlewares here please  
 app.engine('ejs',ejsMate)
@@ -46,6 +51,10 @@ app.post('/login/student',async(req,res)=>{
     const{computerCode, email} = req.body;
     
     const user = await User.findOne({computerCode, email });
+    userIdCarrier = user._id;
+    console.log("The user id is ");
+    console.log(userIdCarrier)
+
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }

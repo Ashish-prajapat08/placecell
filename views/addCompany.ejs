@@ -224,9 +224,9 @@
                 </div>
 
                 <div class="form-group" style="flex: 1">
-                  <label for="websiteLink">Company Website Link</label>
-                  <input type="url" id="websiteLink" placeholder="Enter URL" />
-                  <small>*Don't forget to add http:// or https://.</small>
+                  <label for="websiteLink">Company Email</label>
+                  <input type="url" id="websiteLink" placeholder="Enter Email" />
+                  <!-- <small>*Don't forget to add http:// or https://.</small> -->
                 </div>
               </div>
 
@@ -238,6 +238,11 @@
                       -- Select Organization Type --
                     </option>
                     <!-- Options go here -->
+                    <option>Private sector</option>
+                    <option>Start-up</option>
+                    <option>Govt. owned</option>
+                    <option>Public sector</option>
+                    <option>MNC (Indian or Foreign)</option>
                   </select>
                 </div>
 
@@ -248,6 +253,14 @@
                       -- Select Industry Sector --
                     </option>
                     <!-- Options go here -->
+                    <option>Analytics</option>
+                    <option>Consulting</option>
+                    <option>Core (Technical)</option>
+                    <option>Finance</option>
+                    <option>IT</option>
+                    <option>Business Development</option>
+                    <option>Sales & Marketing</option>
+                    <option>Management</option>
                   </select>
                 </div>
               </div>
@@ -280,6 +293,8 @@
                 <label for="batch">Passout Batch</label>
                 <select id="batch">
                   <option>-- Select Batch --</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
                 </select>
               </div>
             </div>
@@ -288,6 +303,8 @@
                 <label for="recruitment">Recruitment</label>
                 <select id="recruitment">
                   <option>-- Select Recruitment --</option>
+                  <option value="Internship">Internship</option>
+                  <option value="Placement">Placement</option>
                 </select>
               </div>
               <div class="form-group"  >
@@ -321,15 +338,15 @@
   <h3 class="section-header">Student Eligibility Details</h3>
   <div class="section-subheader">Enter eligibility details for placement session</div>
   <div class="form-group">
-      <label>Eligible Programs</label>
-      <div class="form-row" style="flex: 1">
+      <!-- <label>Eligible Programs</label> -->
+      <!-- <div class="form-row" style="flex: 1">
           <label><input type="checkbox"> UG</label>
           <label><input type="checkbox"> MTech</label>
           <label><input type="checkbox"> MPlan</label>
           <label><input type="checkbox"> MSc</label>
           <label><input type="checkbox"> PhD</label>
           <label><input type="checkbox"> MBA</label>
-      </div>
+      </div> -->
   </div>
   <div class="form-row" style="flex: 1">
       <div class="form-group">
@@ -346,23 +363,23 @@
           <label for="minMarks12th">Min. Marks in 12th</label>
           <input type="text" id="minMarks12th" placeholder="Enter percentage">
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
           <label for="medicalRequirement">Medical Requirement</label>
           <select id="medicalRequirement">
               <option>-- Select Medical Requirement --</option>
           </select>
-      </div>
+      </div> -->
   </div>
-  <div class="form-group">
+  <!-- <div class="form-group">
       <label for="serviceAgreement">Service Agreement</label>
       <select id="serviceAgreement">
           <option>-- Select Service Agreement --</option>
       </select>
-  </div>
-  <div class="form-group">
+  </div> -->
+  <!-- <div class="form-group">
       <label for="otherEligibility">Other Eligibility</label>
       <input type="text" id="otherEligibility" placeholder="Enter other eligibility">
-  </div>
+  </div> -->
 </div>
 <!-- slelcton process -->
 <div class="job-profile">
@@ -406,22 +423,22 @@
       </div>
       <div class="form-row">
         <div class="form-row" style="flex: 1">
-          <label class="control-label">Provision for Waitlist</label>
-          <select style="padding: 5px; margin-left: 41px; margin-bottom: 10px; border-radius: 10px">
+          <!-- <label class="control-label">Provision for Waitlist</label> -->
+          <!-- <select style="padding: 5px; margin-left: 41px; margin-bottom: 10px; border-radius: 10px">
             <option value="">-- Select --</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
-          </select>
+          </select> -->
         </div>
-        <div class="form-row" style="flex: 1">
+        <!-- <div class="form-row" style="flex: 1">
           <label class="control-label">Final Offer to be announced</label>
-          <select style="padding: 5px; margin-left: 60px; margin-bottom: 10px; border-radius: 10px; border-radius: 10px">
+          <select style="padding: 5px; margin-left: 0px; margin-bottom: 10px; border-radius: 10px;">
             <option value="">-- Select --</option>
             <option value="Same Day">Same Day</option>
             <option value="Later, but no further interviews">Later, but no further interviews</option>
             <option value="Later, after next stage of interviews">Later, after next stage of interviews</option>
           </select>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

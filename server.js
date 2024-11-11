@@ -13,7 +13,7 @@ const bodyParser = require('body-parser');
 const User = require('./models/userDetails')
 const Company = require('./models/companyDetails')
 const StudentDetails = require('./models/studentDetails')
-// const CompanyInfo = require('./models/companyInfo'); // Uncomment 2 
+const CompanyInfo = require('./models/companyInfo'); // Uncomment 2 
 // const CompanRecord = require('./models/companyRecord) // Uncomment 4 
 
 
@@ -175,20 +175,22 @@ app.post('/login/company',async(req,res)=>{
 
 
 // Uncomment 1 
-// // Creating a route to handle in the company Info 
-// app.post('/addCompanyInfo',async(req,res)){
-//     // adding in directly to the schema 
+// Creating a route to handle in the company Info 
+app.post('/addCompanyInfo',async(req,res)=>{
+    // adding in directly to the schema 
 
-//     const newCompanyDetails = new CompanyInfo(req.body);
-//     await newCompanyDetails.save();
+    const newCompanyDetails = new CompanyInfo(req.body);
+    await newCompanyDetails.save();
+    res.render('viewCompanies',{newCompanyDetails})
 
 // Now here we will create that company apply system 
         // const newRecord = new companyRecord({companyEmail: emailIdCompanyCarrier});
+        // await newRecord.save();
 
-//     // Now the company details are succesfully registered 
+    // Now the company details are succesfully registered 
 
 
-// }
+})
 
 // View company page // Uncomment 3 
 // app.get('/viewCompanyInfo',async(req,res)=>{
@@ -199,6 +201,20 @@ app.post('/login/company',async(req,res)=>{
 // })
 
 
+// Uncomment 6 
+app.put('/updateCompanyInfo', async (req, res) => {
+
+    const updatedData = req.body;  
+    
+      // Find the user by email and update it with the new data
+      const companyData = await CompanyInfo.findOneAndUpdate({ email: emailIdCompanyCarrier }, updatedData, { new: true });
+
+      // Send back the updated user data
+      return res.status(200).json({ message: 'Company updated successfully', companyData });
+    }
+  );
+
+
 
 // Uncomment 5 
 // Rooute for the student to register for a particular company 
@@ -207,6 +223,9 @@ app.use('*',(req,res)=>{
 res.send("All unspecified req here please")
 
 })
+
+
+  
   
 
 // Setting in the server port 

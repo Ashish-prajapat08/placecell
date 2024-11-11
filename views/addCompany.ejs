@@ -1,192 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Placement - Add New Company</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-      }
-
-      body {
-        background-color: #f0f2f5;
-        color: #333;
-      }
-
-      .container {
-        display: flex;
-        height: 100vh;
-      }
-/* 
-      .sidebar {
-        width: 250px;
-        background-color: #a8bdfa;
-        padding-top: 20px;
-        border-right: 1px solid #ddd;
-        margin-top: 80px;
-        border-radius: 20px;
-       
-      }
-
-      .sidebar ul :hover {
-        list-style-type: none;
-        background-color: #4ca3ff;
-        border-radius: 10px;
-      }
-
-      .sidebar ul li {
-        padding: 15px;
-        text-align: left;
-      }
-
-      .sidebar ul li a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 16px;
-      }
-
-      .sidebar ul li.active a {
-        color: #007bff;
-        font-weight: bold;
-      } */
-      .sidebar {
-      width: 200px;
-      background-color: #a8bdfa;
-      color: #ecf0f1;
-      padding-top: 20px;
-      position: fixed;
-      height: 100%;
-      margin-right: 500px;
-      border-radius: 20px;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Placement - Add New Company</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    body { background-color: #f0f2f5; color: #333; }
+    .container { display: flex; height: 100vh; }
+    .sidebar {
+      width: 200px; background-color: #a8bdfa; color: #ecf0f1; padding-top: 20px;
+      position: fixed; height: 100%; border-radius: 20px;
     }
     .sidebar a {
-      display: block;
-      padding: 15px;
-      color: #ecf0f1;
-      text-decoration: none;
+      display: block; padding: 15px; color: #ecf0f1; text-decoration: none;
     }
-    .sidebar a:hover {
-      background-color:  #4ca3ff;
-      border-radius: 20px;
+    .sidebar a:hover { background-color: #4ca3ff; border-radius: 20px; }
+    main { flex-grow: 1; margin-left: 250px; flex-direction: column; }
+    .header {
+      background-color: #4b6cb7; color: #fff; display: flex; justify-content: center;
+      padding: 20px;
     }
-      main {
-        flex-grow: 1;
-      margin-left: 250px;
-        flex-direction: column;
-      }
-
-      .header {
-        background-color: #4b6cb7;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        padding: 20px;
-       
-      }
-
- 
-      .header h1 {
-        font-size: 24px;
-        margin-left: 10px;
-        margin-top: 8px;
-      }
-
-      .profile-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-      }
-
-      .content {
-        padding: 20px;
-        margin: 10px;
-      }
-
-      .company-details {
-        background-color: #ffffff;
-        border-radius: 20px;
-        padding: 20px 30px;
-        margin-top: 10px;
-      }
-
-      .company-details h3 {
-        font-size: 20px;
-        color: #4b6cb7;
-        margin-bottom: 5px;
-      }
-
-      .company-details p {
-        color: #888;
-        margin-bottom: 20px;
-      }
-
-      .form-group {
-        margin-bottom: 15px;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .form-row {
-        display: flex;
-        gap: 20px;
-      }
-
-      .form-group label {
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
-
-      .form-group textarea {
-        resize: vertical;
-      }
-
-      .form-group small {
-        display: block;
-        margin-top: 5px;
-        color: #888;
-      }
-      .job-profile {
-        background-color: #ffffff;
-        border-radius: 20px;
-        color: #4b6cb7;
-        padding: 20px 30px;
-       padding-top: 30px;
-       margin-top: 10px;
-      }
-      .section-subheader{
-        color: #888;
-        margin-bottom: 20px;
-      }
-      .section-header{
-        margin-bottom: 10px;
-      }
-      label{
-        color: #4b6cb7;
-      }
-      .selection-process{
-      flex-direction: column;
-      }
-    </style>
-  </head>
-  <body>
-  <form action="">
+    .header h1 { font-size: 24px; margin-left: 10px; margin-top: 8px; }
+    .profile-icon { width: 40px; height: 40px; border-radius: 50%; }
+    .content { padding: 20px; margin: 10px; }
+    .company-details, .job-profile {
+      background-color: #ffffff; border-radius: 20px; padding: 20px 30px; margin-top: 10px;
+    }
+    .company-details h3, .job-profile h3 { font-size: 20px; color: #4b6cb7; }
+    .form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
+    .form-row { display: flex; gap: 20px; }
+    .form-group label { margin-bottom: 5px; font-weight: bold; color: #4b6cb7; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;
+    }
+    .section-subheader { color: #888; margin-bottom: 20px; }
+    .submit-button {
+      display: flex; justify-content: center; margin-top: 20px;
+    }
+    .submit-button input[type="submit"] {
+      background-color: #4b6cb7; color: #fff; padding: 10px 20px;
+      border: none; border-radius: 5px; cursor: pointer; font-size: 16px;
+    }
+    .submit-button input[type="submit"]:hover {
+      background-color: #3a56a5;
+    }
+  </style>
+</head>
+<body>
+  <form action="/addCompanyInfo" method="post">
     <div class="container">
       <aside class="sidebar">
         <ul>
-          
           <li><a href="addCompany.html">Add New Company</a></li>
           <li><a href="viewCompanies.html">View Company</a></li>
           <li><a href="StudentProfile.html">Student Profile</a></li>
@@ -200,7 +65,6 @@
       </aside>
       <main>
         <header class="header">
-         
           <img src="logo.png" alt="Profile Icon" class="profile-icon" />
           <h1>Placement Portal</h1>
         </header>
@@ -208,289 +72,132 @@
         <section class="content">
           <h2>Add New Company</h2>
 
+          <!-- Company Details Section -->
           <div class="company-details">
             <h3>Company Details</h3>
             <p>Enter company details for placement session.</p>
-
-            <form id="companyForm">
-              <div class="form-row">
-                <div class="form-group" style="flex: 1">
-                  <label for="companyName">Company Name</label>
-                  <input
-                    type="text"
-                    id="companyName"
-                    placeholder="Enter name"
-                  />
-                </div>
-
-                <div class="form-group" style="flex: 1">
-                  <label for="websiteLink">Company Email</label>
-                  <input type="url" id="websiteLink" placeholder="Enter Email" />
-                  <!-- <small>*Don't forget to add http:// or https://.</small> -->
-                </div>
+            <div class="form-row">
+              <div class="form-group" style="flex: 1">
+                <label for="companyName">Company Name</label>
+                <input type="text" id="companyName" name="companyName" placeholder="Enter name" />
               </div>
-
-              <div class="form-row">
-                <div class="form-group" style="flex: 1">
-                  <label for="orgType">Organization Type</label>
-                  <select id="orgType">
-                    <option value="" disabled selected>
-                      -- Select Organization Type --
-                    </option>
-                    <!-- Options go here -->
-                    <option>Private sector</option>
-                    <option>Start-up</option>
-                    <option>Govt. owned</option>
-                    <option>Public sector</option>
-                    <option>MNC (Indian or Foreign)</option>
-                  </select>
-                </div>
-
-                <div class="form-group" style="flex: 1">
-                  <label for="industrySector">Industry Sector</label>
-                  <select id="industrySector">
-                    <option value="" disabled selected>
-                      -- Select Industry Sector --
-                    </option>
-                    <!-- Options go here -->
-                    <option>Analytics</option>
-                    <option>Consulting</option>
-                    <option>Core (Technical)</option>
-                    <option>Finance</option>
-                    <option>IT</option>
-                    <option>Business Development</option>
-                    <option>Sales & Marketing</option>
-                    <option>Management</option>
-                  </select>
-                </div>
+              <div class="form-group" style="flex: 1">
+                <label for="companyEmail">Company Email</label>
+                <input type="email" id="companyEmail" name="companyEmail" placeholder="Enter Email" />
               </div>
-
-              <div class="form-group">
-                <label for="aboutCompany">About Company</label>
-                <textarea
-                  id="aboutCompany"
-                  placeholder="Something about company..."
-                ></textarea>
-              </div>
-            </form>
-          </div>
-          <!-- Job Profile Details -->
-          <div class="job-profile">
-            <h3 class="section-header">Job Profile Details</h3>
-            <div class="section-subheader">
-              Enter job details for placement session
             </div>
             <div class="form-row">
-              <div class="form-group"  style="flex: 1">
-                <label for="jobProfile">Job Profile</label>
-                <input
-                  type="text"
-                  id="jobProfile"
-                  placeholder="Enter job profile"
-                />
+              <div class="form-group" style="flex: 1">
+                <label for="orgType">Organization Type</label>
+                <select id="orgType" name="orgType">
+                  <option disabled selected>-- Select Organization Type --</option>
+                  <option>Private sector</option>
+                  <option>Start-up</option>
+                  <option>Govt. owned</option>
+                  <option>Public sector</option>
+                  <option>MNC (Indian or Foreign)</option>
+                </select>
               </div>
-              <div class="form-group"  style="flex: 1">
+              <div class="form-group" style="flex: 1">
+                <label for="industrySector">Industry Sector</label>
+                <select id="industrySector" name="industrySector">
+                  <option disabled selected>-- Select Industry Sector --</option>
+                  <option>Analytics</option>
+                  <option>Consulting</option>
+                  <option>Core (Technical)</option>
+                  <option>Finance</option>
+                  <option>IT</option>
+                  <option>Business Development</option>
+                  <option>Sales & Marketing</option>
+                  <option>Management</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="aboutCompany">About Company</label>
+              <textarea id="aboutCompany" name="aboutCompany" placeholder="Something about company..."></textarea>
+            </div>
+          </div>
+
+          <!-- Job Profile Details Section -->
+          <div class="job-profile">
+            <h3>Job Profile Details</h3>
+            <p class="section-subheader">Enter job details for placement session</p>
+            <div class="form-row">
+              <div class="form-group" style="flex: 1">
+                <label for="jobProfile">Job Profile</label>
+                <input type="text" id="jobProfile" name="jobProfile" placeholder="Enter job profile" />
+              </div>
+              <div class="form-group" style="flex: 1">
                 <label for="batch">Passout Batch</label>
-                <select id="batch">
+                <select id="batch" name="batch">
                   <option>-- Select Batch --</option>
                   <option value="2024">2024</option>
                   <option value="2025">2025</option>
                 </select>
               </div>
             </div>
-            <div class="form-row"  style="flex: 1">
-              <div class="form-group">
+            <div class="form-row">
+              <div class="form-group" style="flex: 1">
                 <label for="recruitment">Recruitment</label>
-                <select id="recruitment">
+                <select id="recruitment" name="recruitment">
                   <option>-- Select Recruitment --</option>
-                  <option value="Internship">Internship</option>
-                  <option value="Placement">Placement</option>
+                  <option>Internship</option>
+                  <option>Placement</option>
                 </select>
               </div>
-              <div class="form-group"  >
+              <div class="form-group" style="flex: 1">
                 <label for="dateOfJoining">Tentative Date of Joining</label>
-                <input
-                  type="text"
-                  id="dateOfJoining"
-                  placeholder="dd-mm-yyyy"
-                />
+                <input type="date" id="dateOfJoining" name="dateOfJoining" />
               </div>
             </div>
             <div class="form-group">
               <label for="postingLocation">Location of Posting</label>
-              <input
-                type="text"
-                id="postingLocation"
-                placeholder="Enter posting location"
-              />
+              <input type="text" id="postingLocation" name="postingLocation" placeholder="Enter posting location" />
             </div>
             <div class="form-group">
               <label for="jobDescription">Job Description</label>
-              <textarea
-                id="jobDescription"
-                placeholder="Write Job Description here..."
-              ></textarea>
+              <textarea id="jobDescription" name="jobDescription" placeholder="Write Job Description here..."></textarea>
             </div>
           </div>
-    
-  <!-- Student Eligibility Details -->
-   <div class="job-profile">
-  <h3 class="section-header">Student Eligibility Details</h3>
-  <div class="section-subheader">Enter eligibility details for placement session</div>
-  <div class="form-group">
-      <!-- <label>Eligible Programs</label> -->
-      <!-- <div class="form-row" style="flex: 1">
-          <label><input type="checkbox"> UG</label>
-          <label><input type="checkbox"> MTech</label>
-          <label><input type="checkbox"> MPlan</label>
-          <label><input type="checkbox"> MSc</label>
-          <label><input type="checkbox"> PhD</label>
-          <label><input type="checkbox"> MBA</label>
-      </div> -->
-  </div>
-  <div class="form-row" style="flex: 1">
-      <div class="form-group">
-          <label for="minCGPA">Minimum CGPA</label>
-          <input type="text" id="minCGPA" placeholder="Enter minimum CGPA">
-      </div>
-      <div class="form-group">
-          <label for="minMarks10th">Min. Marks in 10th</label>
-          <input type="text" id="minMarks10th" placeholder="Enter percentage">
-      </div>
-  </div>
-  <div class="form-row" style="flex: 1">
-      <div class="form-group">
-          <label for="minMarks12th">Min. Marks in 12th</label>
-          <input type="text" id="minMarks12th" placeholder="Enter percentage">
-      </div>
-      <!-- <div class="form-group">
-          <label for="medicalRequirement">Medical Requirement</label>
-          <select id="medicalRequirement">
-              <option>-- Select Medical Requirement --</option>
-          </select>
-      </div> -->
-  </div>
-  <!-- <div class="form-group">
-      <label for="serviceAgreement">Service Agreement</label>
-      <select id="serviceAgreement">
-          <option>-- Select Service Agreement --</option>
-      </select>
-  </div> -->
-  <!-- <div class="form-group">
-      <label for="otherEligibility">Other Eligibility</label>
-      <input type="text" id="otherEligibility" placeholder="Enter other eligibility">
-  </div> -->
-</div>
-<!-- slelcton process -->
-<div class="job-profile">
-  <div class="card-body">
-    <h3 class="section-header">Selection Process</h3>
-    <div class="section-subheader">Enter selection process details for placement session</div>
 
-    
-      <div class="form-row">
-        <div class="form-row" >
-          <label>Pre Placement Talk</label>
-          <select style="padding: 5px; margin-left: 50px; margin-bottom: 10px; border-radius: 10px">
-            <option value="">-- Select --</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-row" style="flex: 1">
-          <label>Aptitude Test</label>
-          <select  style="padding: 5px; margin-left: 95px; margin-bottom: 10px; border-radius: 10px">
-            <option value="">-- Select --</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </div>  
-      </div>
-
-      <div class="form-row">
-        <div class="form-row" style="flex: 1">
-          <label>Group Discussion</label>
-        
-          <select  style="padding: 5px; margin-left: 60px; margin-bottom: 10px; border-radius: 10px">
-            <option value="">-- Select --</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-row" style="flex: 1">
-          <!-- <label class="control-label">Provision for Waitlist</label> -->
-          <!-- <select style="padding: 5px; margin-left: 41px; margin-bottom: 10px; border-radius: 10px">
-            <option value="">-- Select --</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select> -->
-        </div>
-        <!-- <div class="form-row" style="flex: 1">
-          <label class="control-label">Final Offer to be announced</label>
-          <select style="padding: 5px; margin-left: 0px; margin-bottom: 10px; border-radius: 10px;">
-            <option value="">-- Select --</option>
-            <option value="Same Day">Same Day</option>
-            <option value="Later, but no further interviews">Later, but no further interviews</option>
-            <option value="Later, after next stage of interviews">Later, after next stage of interviews</option>
-          </select>
-        </div> -->
-      </div>
-    </div>
-  </div>
-
-
-
-<!--Registration Details Form-->
-
-  <div class="job-profile">
-      <div class="card-body">
-          <h3 class="section-header">Registration Details</h3>
-          <div class="section-subheader">Enter registration details for placement session</div>
-
-          <div class="row">
-              <div class="col-md-6">
-                  <label class="m-t-20">Last Date to Apply</label>
-                  <input type="datetime-local" style="padding: 5px; margin-left: 60px; margin-bottom: 10px; border-radius: 10px" placeholder="Enter date" ng-model="addNewCompany.newCompanyData.deadline_date" required>
+          <!-- Student Eligibility Details Section -->
+          <div class="job-profile">
+            <h3>Student Eligibility Details</h3>
+            <p class="section-subheader">Enter eligibility details for placement session</p>
+            <div class="form-row">
+              <div class="form-group" style="flex: 1">
+                <label for="minCGPA">Minimum CGPA</label>
+                <input type="number" id="minCGPA" name="minCGPA" placeholder="Enter minimum CGPA" />
               </div>
+              <div class="form-group" style="flex: 1">
+                <label for="minMarks10th">Min. Marks in 10th</label>
+                <input type="number" id="minMarks10th" name="minMarks10th" placeholder="Enter percentage" />
+              </div>
+              <div class="form-group" style="flex: 1">
+                <label for="minMarks12th">Min. Marks in 12th</label>
+                <input type="number" id="minMarks12th" name="minMarks12th" placeholder="Enter percentage" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="flex: 1">
+                <label for="medicalRequirement">Medical Requirement</label>
+                <input type="text" id="medicalRequirement" name="medicalRequirement" placeholder="Enter requirement" />
+              </div>
+              <div class="form-group" style="flex: 1">
+                <label for="training">Training / Bond</label>
+                <input type="text" id="training" name="training" placeholder="Enter training / bond details" />
+              </div>
+            </div>
           </div>
-      </div>
-  </div>
-  <!--Submit Buttom-->
- <div style="text-align: center">
-  <button type="submit" style="background-color: rgb(164, 73, 255); color: #fff; padding: 10px;border-radius: 10px;cursor: pointer;"><i class="ti-check-box"></i> &nbsp; Submit Details</button>
-</div>
-</div>
+
+          <!-- Submit Button Section -->
+          <div class="submit-button">
+            <input type="submit" value="Submit" />
+          </div>
         </section>
       </main>
-    </form>
-    <script>
-      document
-        .getElementById("companyForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          let companyName = document.getElementById("companyName").value;
-          let websiteLink = document.getElementById("websiteLink").value;
-          let orgType = document.getElementById("orgType").value;
-          let industrySector = document.getElementById("industrySector").value;
-          let aboutCompany = document.getElementById("aboutCompany").value;
-
-          if (
-            !companyName ||
-            !websiteLink ||
-            !orgType ||
-            !industrySector ||
-            !aboutCompany
-          ) {
-            alert("Please fill in all fields");
-          } else {
-            alert("Form submitted successfully");
-          }
-        });
-    </script>
-  </body>
+    </div>
+  </form>
+</body>
 </html>

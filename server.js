@@ -109,7 +109,10 @@ app.post('/studentProfile',async(req,res)=>{
 //   await company.save();
 //   res.send("Saving of the company is successfull")
 
-
+app.get('/view/studentProfile',(req,res)=>{
+    
+    res.render('viewStudentProfile')
+})
 
 
 

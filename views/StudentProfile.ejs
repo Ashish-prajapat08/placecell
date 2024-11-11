@@ -28,59 +28,54 @@
       text-decoration: none;
     }
     .sidebar a:hover {
-      background-color:  #4ca3ff;
+      background-color: #4ca3ff;
       border-radius: 20px;
     }
     /* Main content styling */
     .main-content {
-      margin-left: 20px;
+      margin-left: 220px;
       padding: 20px;
       display: flex;
       flex-wrap: wrap;
       border-radius: 30px;
-      margin-right: 20px;
-      background-color:white ;
-      /* width: calc(100% - 200px); */
+      background-color: white;
     }
     .profile-container {
-  display: flex;
-  width: 500px;
-  height: 20%;
-  margin-left: 15%;
-  margin-top: 20px;
-  background-color: #ffffff;
-  border-radius: 30px;
-  justify-content: center; /* Added to center horizontally */
-  align-items: center; /* Added to center vertically */
-}
+      display: flex;
+      width: 500px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border-radius: 30px;
+      justify-content: center;
+      align-items: center;
+    }
     /* Profile image section */
     .profile-image-section {
-  display: flex; /* Make it a flex container */
-  flex-direction: column; /* Arrange items vertically */
-  justify-content: center;
-  align-items: center;
-}
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
     .profile-image {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       background-color: #ffffff;
       margin-bottom: 15px;
-     text-align: justify;
-     margin-top: 8px;
-      
+      text-align: justify;
+      margin-top: 8px;
     }
     .profile-image-section h2 {
       font-size: 1.2em;
       color: #34495e;
-    margin-left: 5px;
-    padding: 1px;
-    align-items: center;
+      margin: 0;
+      padding: 1px;
+      text-align: center;
     }
     /* Profile details section */
     .profile-details {
-      width: 70%;
-      padding-left: 20px;
+      width: 100%;
+      padding: 20px;
     }
     .profile-details label {
       font-weight: bold;
@@ -103,14 +98,16 @@
       border-radius: 4px;
       cursor: pointer;
       margin-top: 20px;
+      width: 100%;
     }
     .update-button:hover {
       background-color: #3498db;
     }
-    .headd{
-    /* justify-content: center; */
-    /* margin-left: 30px; */
+    .headd {
       color: #2980b9;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -118,7 +115,6 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
-    <!-- <a href="otherpages/Homepage.html">Home</a> -->
     <a href="studentProfile.html">Add Student</a>
     <a href="viewStudent.html">View Student</a>
     <a href="companyList.html">Company List</a>
@@ -127,131 +123,70 @@
   </div>
 
   <div class="profile-container">
-    <!-- Profile Image and Basic Info -->
     <div class="profile-image-section">
-     <img src="6833591.png" alt="" class="profile-image">
+      <img src="6833591.png" alt="Profile Image" class="profile-image">
       <h2>Anushka Saratkar</h2>
       <h2>CSIT</h2>
       <h2>2026</h2>
     </div>
-    </div>
+  </div>
+
   <!-- Main content -->
   <div class="main-content">
     <h2 class="headd">Student Profile</h2>
-      <!-- Profile Details Form -->
-       <form action="/studentProfile" method="post">
+    <form action="/studentProfile" method="post">
       <div class="profile-details" id="profile">
         <label>Name:</label>
-        <input type="text" id="name">
+        <input type="text" id="name" name="name">
 
         <label>College ID:</label>
-        <input type="text" id="collegeId" value="<%= user.computerCode %>">
+        <input type="text" id="collegeId" name="collegeId" value="<%= user.computerCode %>">
 
         <label>Degree:</label>
-        <input type="text" id="degree">
+        <input type="text" id="degree" name="degree">
 
         <label>Branch:</label>
-        <input type="text" id="branch">
+        <input type="text" id="branch" name="branch">
 
         <label>Email:</label>
-        <input type="email" id="email" value="<%= user.email %>">
+        <input type="email" id="email" name="email" value="<%= user.email %>">
 
         <label>Contact:</label>
-        <input type="text" id="contact">
+        <input type="text" id="contact" name="contact">
 
         <label>CGPA:</label>
-        <input type="text" id="cgpa">
+        <input type="text" id="cgpa" name="cgpa">
 
         <label>Active Backlogs:</label>
-        <input type="text" id="backlogs">
+        <input type="text" id="backlogs" name="backlogs">
 
         <label>10th Percentage:</label>
-        <input type="text" id="tenthPercentage">
+        <input type="text" id="tenthPercentage" name="tenthPercentage">
 
         <label>12th Percentage:</label>
-        <input type="text" id="twelfthPercentage">
+        <input type="text" id="twelfthPercentage" name="twelfthPercentage">
 
         <label>10th Board:</label>
-        <input type="text" id="tenthBoard">
+        <input type="text" id="tenthBoard" name="tenthBoard">
 
         <label>12th Board:</label>
-        <input type="text" id="twelfthBoard">
+        <input type="text" id="twelfthBoard" name="twelfthBoard">
 
         <label>Address:</label>
-        <input type="text" id="address">
+        <input type="text" id="address" name="address">
 
         <label>City:</label>
-        <input type="text" id="city">
+        <input type="text" id="city" name="city">
 
         <label>LinkedIn Profile:</label>
-        <input type="url" id="linkedinProfile">
-
-        <!-- <label>Resume:</label>
-        <input type="file" id="resume"> -->
+        <input type="url" id="linkedinProfile" name="linkedinProfile">
 
         <label>Resume URL:</label>
-        <input type="text" id="resume" placeholder="Enter resume URL or path">
-
+        <input type="text" id="resume" name="resume" placeholder="Enter resume URL or path">
 
         <button class="update-button" type="submit">Create Profile</button>
-      </form>
       </div>
-    </div>
-  
-
-  <script src="firebase-config.js"></script>
-  <script>
-    // Fetch current student data from Firestore
-    function loadProfile() {
-      const userId = "studentID"; // Example user ID
-      db.collection("students").doc(userId).get().then((doc) => {
-        if (doc.exists) {
-          document.getElementById("name").value = doc.data().name;
-          document.getElementById("collegeId").value = doc.data().collegeId;
-          document.getElementById("degree").value = doc.data().degree;
-          document.getElementById("branch").value = doc.data().branch;
-          document.getElementById("email").value = doc.data().email;
-          document.getElementById("contact").value = doc.data().contact;
-          document.getElementById("cgpa").value = doc.data().cgpa;
-          document.getElementById("backlogs").value = doc.data().backlogs;
-          document.getElementById("tenthPercentage").value = doc.data().tenthPercentage;
-          document.getElementById("twelfthPercentage").value = doc.data().twelfthPercentage;
-          document.getElementById("tenthBoard").value = doc.data().tenthBoard;
-          document.getElementById("twelfthBoard").value = doc.data().twelfthBoard;
-          document.getElementById("address").value = doc.data().address;
-          document.getElementById("city").value = doc.data().city;
-          document.getElementById("linkedinProfile").value = doc.data().linkedinProfile;
-        }
-      });
-    }
-
-    function updateProfile() {
-      const userId = "studentID"; // Example user ID
-      db.collection("students").doc(userId).set({
-        name: document.getElementById("name").value,
-        collegeId: document.getElementById("collegeId").value,
-        degree: document.getElementById("degree").value,
-        branch: document.getElementById("branch").value,
-        email: document.getElementById("email").value,
-        contact: document.getElementById("contact").value,
-        cgpa: document.getElementById("cgpa").value,
-        backlogs: document.getElementById("backlogs").value,
-        tenthPercentage: document.getElementById("tenthPercentage").value,
-        twelfthPercentage: document.getElementById("twelfthPercentage").value,
-        tenthBoard: document.getElementById("tenthBoard").value,
-        twelfthBoard: document.getElementById("twelfthBoard").value,
-        address: document.getElementById("address").value,
-        city: document.getElementById("city").value,
-        linkedinProfile: document.getElementById("linkedinProfile").value,
-      }).then(() => {
-        alert("Profile updated successfully!");
-        window.location.href = "view-student.html"; // Redirect to view student page
-      }).catch((error) => {
-        console.error("Error updating profile:", error);
-      });
-    }
-
-    loadProfile(); // Call on page load
-  </script>
+    </form>
+  </div>
 </body>
 </html>

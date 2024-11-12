@@ -15,6 +15,7 @@ const Company = require('./models/companyDetails')
 const StudentDetails = require('./models/studentDetails')
 const CompanyInfo = require('./models/companyInfo'); // Uncomment 2 
 const CompanyRecord = require('./models/companyRecord')
+const ApplicationDetails = require('./models/applicationStatus')
 // const CompanRecord = require('./models/companyRecord) // Uncomment 4 
 
 
@@ -233,7 +234,7 @@ app.post('/updateCompanyInfo', async (req, res) => {
   );
 
 
-  
+
   // student is clicking in the apply button 
   app.get('/applyToCompany/:id',async(req,res)=>{
     // console.log(req.params.id);
@@ -259,6 +260,16 @@ app.post('/updateCompanyInfo', async (req, res) => {
             { $push: { registeredStudents: emailIdCarrier } },
             { new: true } // This option returns the updated document
         );
+
+        const newApplicationStatus = await ApplicationDetails({
+            studentEmail: emailIdCarrier,
+            companyEmail: companyEmailFromButton
+
+        })
+
+        await newApplicationStatus.save();
+
+         
 
         // Check if the update was successful
         if (updatedCompanyRecord) {

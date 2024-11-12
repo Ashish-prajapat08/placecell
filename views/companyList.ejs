@@ -93,10 +93,9 @@
 <body>
   <div class="container">
     <aside class="sidebar">
-      <a href="studentDashboard.html">Dashboard</a>
-      <a href="companyList.html">Company List</a>
-      <a href="appliedJobs.html">Applied Jobs</a>
-      <a href="studentProfile.html">Profile</a>
+
+      <a href="/viewCompaniesFromStudent">Company List</a>
+      <a href="/view/studentProfile">Profile</a>
       <a href="../otherpages/contact.html">Contact Us</a>
       <a href="../otherpages/homepage.html">Log Out</a>
     </aside>
@@ -131,15 +130,18 @@
                 <td><%= new Date(company.dateOfJoining).toLocaleDateString() %></td>
                 <td><%= company.stipend %></td>
                 <td><%= company.companyEmail %></td>
-                <!-- Making in the apply button route and attaching the unique identifier to it  -->
                 <td>
-                  <a href="/applyToCompany/<%= company.companyEmail %>">
-                    <button class="apply-btn">Apply</button>
-                  </a>
+                  <% if (company.applicationStatus === 'Not Applied') { %>
+                    <a href="/applyToCompany/<%= company.companyEmail %>">
+                      <button class="apply-btn">Apply</button>
+                    </a>
+                  <% } else { %>
+                    <button class="apply-btn" disabled>Applied</button>
+                  <% } %>
                 </td>
-                
               </tr>
             <% }) %>
+            
           </tbody>
         </table>
       </section>

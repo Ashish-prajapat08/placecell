@@ -73,9 +73,18 @@ app.post('/login/student',async(req,res)=>{
         return res.status(400).json({message: 'Wrong password'});
     }
 
+    const studentDetails = StudentDetails.findOne({email : emailIdCarrier});
+
+    if(studentDetails){
+        res.redirect('/view/studentProfile')
+    }
+
+    else{
+
     // yaha pe present h matlab ki auth and password verify ho gye h so 
     // redirect krdo studentProfile k upar 
     res.render('studentProfile',{user})
+    }
 })
 
 
@@ -169,11 +178,30 @@ app.post('/login/company',async(req,res)=>{
         return res.status(400).json({message: 'Wrong password'});
     }
 
+    // it means finding in the exisiting company just to keep the same name using it 
+    const newCompanyDetails = await CompanyInfo.findOne({companyEmail: emailIdCompanyCarrier})
+
+    if(newCompanyDetails){
+        
+        // res.render('viewCompanies',{newCompanyDetails})
+        res.redirect('/viewCompanyDetails')
+
+    }
+
     // yaha pe present h matlab ki auth and password verify ho gye h so 
     // redirect krdo studentProfile k upar 
     // res.send('hahahacom')
     res.render('addCompany.ejs')
 })
+
+app.get('/viewCompanyDetails',async(req,res)=>{
+      // it means finding in the exisiting company just to keep the same name using it 
+      const newCompanyDetails = await CompanyInfo.findOne({companyEmail: emailIdCompanyCarrier})
+    res.render('viewCompanies',{newCompanyDetails}) 
+
+})
+
+
 
 
 // Uncomment 1 
@@ -278,6 +306,9 @@ app.post('/updateCompanyInfo', async (req, res) => {
         // Extract the companyEmail from each record into a new array
         const pendingCompanyEmails = pendingApplications.map(record => record.companyEmail);
 
+        // vo emails h jo pending k andar h 
+        
+
 
         // same for the rejected and shortlisted 
         const shortListedApplications =  await ApplicationDetails.find({ applicationStatus: "ShortListed" });
@@ -311,26 +342,210 @@ app.post('/updateCompanyInfo', async (req, res) => {
   })
 
 
-  app.get('/viewCompaniesFromStudent',async(req,res)=>{
-    // getting all the companies 
-    // const companies = await Company.find({});
-    // console.log("Company Details:", companies);
-    const companies = await CompanyInfo.find({});
-    // console.log(companyInfo)
-    res.render('companyList',{companies})
+  // Check applied status 
 
-  })
+
+
+
+//   app.get('/viewCompaniesFromStudent',async(req,res)=>{
+//     // getting all the companies 
+//     // const companies = await Company.find({});
+//     // console.log("Company Details:", companies);
+//     const companies = await CompanyInfo.find({});
+//     // console.log(companyInfo)
+//     res.render('companyList',{companies})
+
+//   })
+
+app.get('/viewCompaniesFromStudent', async (req, res) => {
+    try {
+      const companies = await CompanyInfo.find({});
+      const studentEmail = emailIdCarrier; // Assuming emailIdCarrier is set
+  
+      // Fetch applications for the current student
+      const applications = await ApplicationDetails.find({ studentEmail });
+  
+      // Map applications to quickly check application status for each company
+      const applicationMap = applications.reduce((map, app) => {
+        map[app.companyEmail] = app.applicationStatus;
+        return map;
+      }, {});
+  
+      // Pass application status along with company details
+      const companyData = companies.map(company => {
+        const status = applicationMap[company.companyEmail] || 'Not Applied';
+        return {
+          ...company._doc,
+          applicationStatus: status,
+        };
+      });
+  
+      res.render('companyList', { companies: companyData });
+    } catch (error) {
+      console.error("Error fetching companies or applications:", error);
+      res.status(500).send("An error occurred.");
+    }
+  });
+  
+  
+  
 
 // Uncomment 5 
 // Rooute for the student to register for a particular company 
+
+
+
+
+// Company ki taraf se applied students 
+
+app.get('/appliedStudents',async(req,res)=>{
+
+    const companyRecordForStudentsApplied = await CompanyRecord.findOne({companyEmail: emailIdCompanyCarrier})
+    if (!companyRecordForStudentsApplied) {
+        return res.status(404).send("Company not found.");
+    }
+
+    console.log(companyRecordForStudentsApplied)
+
+    // Finding in there info 
+    const registeredStudentEmails = companyRecordForStudentsApplied.registeredStudents;
+    const studentDetails = await StudentDetails.find({
+        email: { $in: registeredStudentEmails }
+    });
+
+    console.log(registeredStudentEmails)
+
+
+        const applicationStatuses = await ApplicationDetails.find({
+            studentEmail: { $in: registeredStudentEmails },
+            companyEmail: emailIdCompanyCarrier
+        });
+
+        console.log(applicationStatuses)
+
+        const applicationStatusMap = {};
+        applicationStatuses.forEach(app => {
+            applicationStatusMap[app.studentEmail] = app.applicationStatus || "Not Applied";
+        });
+
+        console.log(applicationStatusMap)
+
+        const studentData = studentDetails.map(student => ({
+            name: student.name,
+            branch: student.branch,
+            email: student.email,
+            cgpa: student.cgpa,
+            resume: student.resume,
+            linkedinProfile: student.linkedinProfile,
+            applicationStatus: applicationStatusMap[student.email] || "Not Applied"
+        }));
+
+
+        console.log("Testing ")
+        console.log(studentData)
+
+        res.render('appliedStudents',{studentData,emailIdCompanyCarrier});
+})
+
+app.get('/shortlist/:studentEmailFromButton/register/:companyEmailFromButton',async(req,res)=>{
+
+    const {studentEmailFromButton, companyEmailFromButton} = req.params;
+    try {
+        // Find the application and update its status to 'ShortListed'
+        const updatedApplication = await ApplicationDetails.findOneAndUpdate(
+            {
+                studentEmail: studentEmailFromButton, 
+                companyEmail: companyEmailFromButton
+            },
+            {
+                $set: { applicationStatus: 'ShortListed' }
+            },
+            {
+                new: true,  // Return the updated document
+                runValidators: true  // Ensure any validation rules are applied
+            }
+        );
+       
+
+       res.redirect('/appliedStudents')
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+ 
+
+
+})
+
+// Work here 
+app.get('/applicationStatus',async(req,res)=>{
+    // const allApplicationStatus = await ApplicationDetails.find({});
+    const pendingApplications = await ApplicationDetails.find({ applicationStatus: "pending(Applied)" });
+
+    // Extract the companyEmail from each record into a new array
+    const pendingCompanyEmails = pendingApplications.map(record => record.companyEmail);
+
+
+    // same for the rejected and shortlisted 
+    const shortListedApplications =  await ApplicationDetails.find({ applicationStatus: "ShortListed" });
+    const ShortListedCompanyEmails = shortListedApplications.map(record => record.companyEmail);
+
+
+    // Rejected 
+    const rejectedApplications = await ApplicationDetails.find({ applicationStatus: "Rejected" });
+    const rejectedCompanyEmails = rejectedApplications.map(record => record.companyEmail);
+
+    console.log(pendingApplications);        // Shows the filtered records with "pending(Applied)"
+    console.log(pendingCompanyEmails);       // Shows an array of companyEmail with "pending(Applied)"
+
+
+    const companies = await CompanyInfo.find({});
+
+    // console.log("all applcationsStatus")
+    // console.log(allApplicationStatus.)
+
+    res.render('appliedStatus',{companies,pendingCompanyEmails,rejectedCompanyEmails,ShortListedCompanyEmails})
+
+
+
+})
+
+app.get('/reject/:studentEmailFromButton/register/:companyEmailFromButton', async (req, res) => {
+    const { studentEmailFromButton, companyEmailFromButton } = req.params;
+
+    try {
+        // Find the application and update its status to 'Rejected'
+        const updatedApplication = await ApplicationDetails.findOneAndUpdate(
+            {
+                studentEmail: studentEmailFromButton, 
+                companyEmail: companyEmailFromButton
+            },
+            {
+                $set: { applicationStatus: 'Rejected' }
+            },
+            {
+                new: true,  // Return the updated document
+                runValidators: true  // Ensure any validation rules are applied
+            }
+        );
+
+
+        res.redirect('/appliedStudents')
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+
+
+
+  
 
 app.use('*',(req,res)=>{
 res.send("All unspecified req here please")
 
 })
 
-
-  
   
 
 // Setting in the server port 

@@ -73,48 +73,78 @@
             background-color: #e74c3c;
             color: #fff;
         }
+        .sidebar {
+            width: 200px;
+            background-color: #a8bdfa;
+            color: #ecf0f1;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            color: #ecf0f1;
+            text-decoration: none;
+        }
+        .sidebar a:hover {
+            background-color: #4ca3ff;
+            border-radius: 20px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Applied Students</h1>
     </div>
+    <aside class="sidebar">
+        <ul>
+        
+          <li><a href="/viewCompanyDetails">View Company</a></li>
+          <li><a href="#">Announcements</a></li>
+          <li><a href="../otherpages/developer.html">Developer</a></li>
+          <li><a href="../otherpages/contact.html">Contact Us</a></li>
+          <li><a href="../otherpages/hallOfFame.html">Hall of Fame</a></li>
+          <li><a href="../otherpages/Homepage.html">Log Out</a></li>
+        </ul>
+    </aside>
     <div class="container">
         <h2>Students who applied for [Job Role]</h2>
 
-        <!-- Example student card, repeat this structure for each applied student -->
-        <div class="student-card">
-            <div class="student-info">
-                <h3>John Doe</h3>
-                <p><strong>Email:</strong> johndoe@example.com</p>
-                <p><strong>Branch:</strong> Computer Science</p>
-                <p><strong>CGPA:</strong> 8.5</p>
-                <p><strong>Skills:</strong> Java, Python, Web Development</p>
-            </div>
-            <div class="actions">
-                <button class="view-profile">View Profile</button>
-                <button class="shortlist">Shortlist</button>
-                <button class="reject">Reject</button>
-            </div>
-        </div>
+        <!-- Loop through each student in studentData array -->
+        <% studentData.forEach(student => { %>
+            <div class="student-card">
+                <div class="student-info">
+                    <h3><%= student.name %></h3>
+                    <p><strong>Email:</strong> <%= student.email %></p>
+                    <p><strong>Branch:</strong> <%= student.branch %></p>
+                    <p><strong>CGPA:</strong> <%= student.cgpa %></p>
+                    <p><strong>Resume:</strong> <a href="<%= student.resume %>" target="_blank">View Resume</a></p>
+                    <p><strong>LinkedIn:</strong> <a href="<%= student.linkedinProfile %>" target="_blank">Profile</a></p>
+                </div>
 
-        <div class="student-card">
-            <div class="student-info">
-                <h3>Jane Smith</h3>
-                <p><strong>Email:</strong> janesmith@example.com</p>
-                <p><strong>Branch:</strong> Information Technology</p>
-                <p><strong>CGPA:</strong> 9.2</p>
-                <p><strong>Skills:</strong> Data Analysis, Machine Learning, SQL</p>
+                <div class="actions">
+                    <% if (student.applicationStatus === 'pending(Applied)') { %>
+                        <a href="/shortlist/<%= student.email %>/register/<%=emailIdCompanyCarrier %>">
+                            <button class="shortlist">Shortlist</button>
+                        </a>
+                        <a href="/reject/<%= student.email%>/register/<%=emailIdCompanyCarrier %>">
+                            <button class="reject">Reject</button>
+                        </a>
+                    <% } else if (student.applicationStatus === 'ShortListed') { %>
+                        <button class="shortlist">Selected</button>
+                    <% } else { %>
+                        <button class="reject">Rejected</button>
+                    <% } %>
+                </div>
             </div>
-            <div class="actions">
-                <button class="view-profile">View Profile</button>
-                <button class="shortlist">Shortlist</button>
-                <button class="reject">Reject</button>
-            </div>
-        </div>
-
-        <!-- Repeat similar blocks for more students -->
-
+        <% }); %>
     </div>
 </body>
 </html>

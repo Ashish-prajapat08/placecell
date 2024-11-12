@@ -14,6 +14,7 @@ const User = require('./models/userDetails')
 const Company = require('./models/companyDetails')
 const StudentDetails = require('./models/studentDetails')
 const CompanyInfo = require('./models/companyInfo'); // Uncomment 2 
+const CompanyRecord = require('./models/companyRecord')
 // const CompanRecord = require('./models/companyRecord) // Uncomment 4 
 
 
@@ -180,7 +181,12 @@ app.post('/addCompanyInfo',async(req,res)=>{
     // adding in directly to the schema 
 
     const newCompanyDetails = new CompanyInfo(req.body);
+    const companyEmail = req.body.companyEmail;
     await newCompanyDetails.save();
+
+    console.log("here check>>>>>")
+    const newCompanyNowOpenStudents =  new CompanyRecord({companyEmail});
+    await newCompanyNowOpenStudents.save();
     res.render('viewCompanies',{newCompanyDetails})
 
 // Now here we will create that company apply system 
@@ -226,9 +232,43 @@ app.post('/updateCompanyInfo', async (req, res) => {
     }
   );
 
+
+  
   // student is clicking in the apply button 
   app.get('/applyToCompany/:id',async(req,res)=>{
+    // console.log(req.params.id);
+
+    // const companyEmailFromButton = req.params.id;
+    // console.log(companyEmailFromButton)
+
+
+    // // const companyDetails = await CompanyInfo.findOne({companyEmail: companyEmailFromButton})
+    // const companyRecord = await CompanyRecord.findOne({companyEmail: companyEmailFromButton});
+
+    // const companyEmailExtract = companyRecord.companyEmail;
+
     console.log(req.params.id);
+
+    const companyEmailFromButton = req.params.id;
+    console.log(companyEmailFromButton);
+
+ 
+        // finding the company record 
+        const updatedCompanyRecord = await CompanyRecord.findOneAndUpdate(
+            { companyEmail: companyEmailFromButton },
+            { $push: { registeredStudents: emailIdCarrier } },
+            { new: true } // This option returns the updated document
+        );
+
+        // Check if the update was successful
+        if (updatedCompanyRecord) {
+            console.log("Updated Company Record:", updatedCompanyRecord);
+            res.status(200).send("Student email added to registeredStudents array.");
+        } else {
+            res.status(404).send("Company not found.");
+        }
+  
+
     
 
   })

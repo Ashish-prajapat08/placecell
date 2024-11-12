@@ -15,7 +15,7 @@ const applicationDetails = new Schema({
     applicationStatus:{
         type: String,
         required: false,
-        default: 'pending'
+        default: 'Not Applied'
 
     }
 

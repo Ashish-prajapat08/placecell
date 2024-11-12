@@ -1,26 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Applied Status</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Portal - Company List</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f0f2f5;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 200px;
+      background-color: #a8bdfa;
+      color: #ecf0f1;
+      padding-top: 20px;
+      position: fixed;
+      height: 100%;
+      border-radius: 20px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 15px;
+      color: #ecf0f1;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background-color: #4ca3ff;
+      border-radius: 20px;
+    }
+    main {
+      flex-grow: 1;
+      margin-left: 220px;
+      padding: 20px;
+    }
+    .header {
+      background-color: #4b6cb7;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .header h1 {
+      font-size: 24px;
+    }
+    .content {
+      padding: 20px;
+    }
+    .company-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .company-table th,
+    .company-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    .company-table th {
+      background-color: #4b6cb7;
+      color: #ffffff;
+    }
+    .company-table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+    .apply-btn {
+      background-color: #4b6cb7;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .apply-btn:hover {
+      background-color: #3a569b;
+    }
+  </style>
 </head>
 <body>
-  <h2>Applied Status</h2>
-  <div id="appliedStatusList"></div>
+  <div class="container">
+    <aside class="sidebar">
+      <a href="studentDashboard.html">Dashboard</a>
+      <a href="companyList.html">Company List</a>
+      <a href="appliedJobs.html">Applied Jobs</a>
+      <a href="studentProfile.html">Profile</a>
+      <a href="../otherpages/contact.html">Contact Us</a>
+      <a href="../otherpages/homepage.html">Log Out</a>
+    </aside>
 
-  <script src="firebase-config.js"></script>
-  <script>
-    function loadAppliedStatus() {
-      const userId = "studentID";
-      db.collection("applications").where("studentId", "==", userId).get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          const application = doc.data();
-          document.getElementById("appliedStatusList").innerHTML += `<p>Company ID: ${application.companyId} - Status: ${application.status}</p>`;
-        });
-      });
-    }
+    <main>
+      <header class="header">
+        <h1>Available Companies for Application</h1>
+      </header>
 
-    loadAppliedStatus();
-  </script>
+      <section class="content">
+        <h2>Listed Companies</h2>
+        <table class="company-table">
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Company Name</th>
+              <th>Location</th>
+              <th>Job Profile</th>
+              <th>Date of Drive</th>
+              <th>Stipend</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% companies.forEach(company => { %>
+              <tr>
+                <td><%= company.jobProfile %></td>
+                <td><%= company.companyName %></td>
+                <td><%= company.postingLocation %></td>
+                <td><%= company.orgType %></td>
+                <td><%= new Date(company.dateOfJoining).toLocaleDateString() %></td>
+                <td><%= company.stipend %></td>
+                <td><%=company.companyEmail %></td>
+
+                <% if (pendingCompanyEmails.includes(company.companyEmail)) { %>
+                  <td>pending(Applied)</td>
+              <% } else { %>
+                <td>Not Applied</td>
+              <% } %>
+                
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
 </body>
 </html>

@@ -260,24 +260,40 @@ app.post('/updateCompanyInfo', async (req, res) => {
             { $push: { registeredStudents: emailIdCarrier } },
             { new: true } // This option returns the updated document
         );
+        
+
+
 
         const newApplicationStatus = await ApplicationDetails({
             studentEmail: emailIdCarrier,
-            companyEmail: companyEmailFromButton
+            companyEmail: companyEmailFromButton,
+            applicationStatus: 'pending(Applied)'
 
         })
-
         await newApplicationStatus.save();
+
+        // const allApplicationStatus = await ApplicationDetails.find({});
+        const pendingApplications = await ApplicationDetails.find({ applicationStatus: "pending(Applied)" });
+
+        // Extract the companyEmail from each record into a new array
+        const pendingCompanyEmails = pendingApplications.map(record => record.companyEmail);
+
+        console.log(pendingApplications);        // Shows the filtered records with "pending(Applied)"
+        console.log(pendingCompanyEmails);       // Shows an array of companyEmail with "pending(Applied)"
+
+
+        const companies = await CompanyInfo.find({});
+
+        // console.log("all applcationsStatus")
+        // console.log(allApplicationStatus.)
+
+        res.render('appliedStatus',{companies,pendingCompanyEmails,emailIdCompanyCarrier})
+
+
 
          
 
-        // Check if the update was successful
-        if (updatedCompanyRecord) {
-            console.log("Updated Company Record:", updatedCompanyRecord);
-            res.status(200).send("Student email added to registeredStudents array.");
-        } else {
-            res.status(404).send("Company not found.");
-        }
+      
   
 
     

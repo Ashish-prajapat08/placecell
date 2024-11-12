@@ -134,10 +134,13 @@
 
                 <% if (pendingCompanyEmails.includes(company.companyEmail)) { %>
                   <td>pending(Applied)</td>
-              <% } else { %>
-                <td>Not Applied</td>
-              <% } %>
-                
+              <% } else if(rejectedCompanyEmails.includes(company.companyEmail)){ %>
+                <td>Rejected</td>
+              <% } else if(shortListedCompanyEmails.includes(company.companyEmail)){%>
+                <td>ShortListed</td>
+                <% }else {%>
+                  <td>Not Applied</td>
+                <% } %>
               </tr>
             <% }) %>
           </tbody>

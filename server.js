@@ -278,6 +278,16 @@ app.post('/updateCompanyInfo', async (req, res) => {
         // Extract the companyEmail from each record into a new array
         const pendingCompanyEmails = pendingApplications.map(record => record.companyEmail);
 
+
+        // same for the rejected and shortlisted 
+        const shortListedApplications =  await ApplicationDetails.find({ applicationStatus: "ShortListed" });
+        const ShortListedCompanyEmails = shortListedApplications.map(record => record.companyEmail);
+
+
+        // Rejected 
+        const rejectedApplications = await ApplicationDetails.find({ applicationStatus: "Rejected" });
+        const rejectedCompanyEmails = rejectedApplications.map(record => record.companyEmail);
+
         console.log(pendingApplications);        // Shows the filtered records with "pending(Applied)"
         console.log(pendingCompanyEmails);       // Shows an array of companyEmail with "pending(Applied)"
 
@@ -287,7 +297,7 @@ app.post('/updateCompanyInfo', async (req, res) => {
         // console.log("all applcationsStatus")
         // console.log(allApplicationStatus.)
 
-        res.render('appliedStatus',{companies,pendingCompanyEmails,emailIdCompanyCarrier})
+        res.render('appliedStatus',{companies,pendingCompanyEmails,emailIdCompanyCarrier,rejectedCompanyEmails,ShortListedCompanyEmails})
 
 
 

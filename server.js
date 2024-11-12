@@ -226,11 +226,22 @@ app.post('/updateCompanyInfo', async (req, res) => {
     }
   );
 
+  // student is clicking in the apply button 
+  app.get('/applyToCompany/:id',async(req,res)=>{
+    console.log(req.params.id);
+    
+
+  })
+
 
   app.get('/viewCompaniesFromStudent',async(req,res)=>{
     // getting all the companies 
-    const companies = await Company.find({});
-    console.log("Company Details:", companies);
+    // const companies = await Company.find({});
+    // console.log("Company Details:", companies);
+    const companies = await CompanyInfo.find({});
+    // console.log(companyInfo)
+    res.render('companyList',{companies})
+
   })
 
 // Uncomment 5 

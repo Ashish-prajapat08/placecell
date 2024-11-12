@@ -29,6 +29,12 @@ const companySchema = new mongoose.Schema({
     ],
     required: true,
   },
+
+  stipend:{
+    type:Number,
+    required:true
+  },
+
   aboutCompany: {
     type: String,
     required: true,

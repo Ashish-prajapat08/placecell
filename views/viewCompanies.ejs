@@ -16,11 +16,32 @@
       background-color: #f0f2f5;
       color: #333;
       display: flex;
-      justify-content: center;
+    }
+
+    .sidebar {
+      width: 200px;
+      background-color: #a8bdfa;
+      color: #ecf0f1;
       padding-top: 20px;
+      position: fixed;
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px;
+      color: #ecf0f1;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      background-color: #4ca3ff;
+      border-radius: 20px;
     }
 
     .container {
+      margin-left: 220px;
       width: 80%;
       max-width: 600px;
       background-color: #fff;
@@ -68,26 +89,44 @@
   </style>
 </head>
 <body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <ul>
+      <li><a href="addCompany.html">Add New Company</a></li>
+      <li><a href="viewCompanies.html">View Company</a></li>
+      <li><a href="StudentProfile.html">Student Profile</a></li>
+      <li><a href="appliedStudents.html">Applied Students</a></li>
+      <li><a href="#">Announcements</a></li>
+      <li><a href="../otherpages/developer.html">Developer</a></li>
+      <li><a href="../otherpages/contact.html">Contact Us</a></li>
+      <li><a href="../otherpages/hallOfFame.html">Hall of Fame</a></li>
+      <li><a href="../otherpages/Homepage.html">Log Out</a></li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
   <div class="container">
     <h2>Company Details</h2>
     <div class="detail"><strong>Company Name:</strong> <%= newCompanyDetails.companyName %></div>
     <div class="detail"><strong>Email:</strong> <%= newCompanyDetails.companyEmail %></div>
-    <div class="detail"><strong>Organization Type:</strong> <%=newCompanyDetails.orgType %></div>
+    <div class="detail"><strong>Organization Type:</strong> <%= newCompanyDetails.orgType %></div>
     <div class="detail"><strong>Industry Sector:</strong> <%= newCompanyDetails.industrySector %></div>
-    <div class="detail"><strong>About Company:</strong><<%= newCompanyDetails.aboutCompany%>/div>
-    <div class="detail"><strong>Job Profile:</strong> <%=newCompanyDetails.jobProfile %></div>
+    <div class="detail"><strong>About Company:</strong> <%= newCompanyDetails.aboutCompany %></div>
+    <div class="detail"><strong>Job Profile:</strong> <%= newCompanyDetails.jobProfile %></div>
     <div class="detail"><strong>Batch:</strong> <%= newCompanyDetails.batch %></div>
-    <div class="detail"><strong>Recruitment Type:</strong> <%= newCompanyDetails. recruitment %></div>
-    <div class="detail"><strong>Date of Joining:</strong> <%=newCompanyDetails.dateOfJoining %></div>
-    <div class="detail"><strong>Posting Location:</strong> <%=newCompanyDetails.postingLocation %></div>
-    <div class="detail"><strong>Job Description:</strong> <%=newCompanyDetails.jobDescription %></div>
-    <div class="detail"><strong>Minimum CGPA:</strong> <%=newCompanyDetails.minCGPA %></div>
-    <div class="detail"><strong>Minimum Marks in 10th:</strong> <%=newCompanyDetails.minMarks10th %></div>
-    <div class="detail"><strong>Minimum Marks in 12th:</strong> <%=newCompanyDetails.minMarks12th %></div>
+    <div class="detail"><strong>Recruitment Type:</strong> <%= newCompanyDetails.recruitment %></div>
+    <div class="detail"><strong>Date of Joining:</strong> <%= newCompanyDetails.dateOfJoining %></div>
+    <div class="detail"><strong>Posting Location:</strong> <%= newCompanyDetails.postingLocation %></div>
+    <div class="detail"><strong>Job Description:</strong> <%= newCompanyDetails.jobDescription %></div>
+    <div class="detail"><strong>Minimum CGPA:</strong> <%= newCompanyDetails.minCGPA %></div>
+    <div class="detail"><strong>Minimum Marks in 10th:</strong> <%= newCompanyDetails.minMarks10th %></div>
+    <div class="detail"><strong>Minimum Marks in 12th:</strong> <%= newCompanyDetails.minMarks12th %></div>
     <div class="detail"><strong>Medical Requirement:</strong> <%= newCompanyDetails.medicalRequirement %></div>
-    <div class="detail"><strong>Training/Bond Requirement:</strong><%= newCompanyDetails.training %></div>
+    <div class="detail"><strong>Training/Bond Requirement:</strong> <%= newCompanyDetails.training %></div>
     <div class="button-container">
-      <button class="edit-button">Edit</button>
+      <a href="/editCompanyDetails">
+      <button class="edit-button" >Edit</button>
+    </a>
     </div>
   </div>
 </body>

@@ -192,6 +192,17 @@ app.post('/addCompanyInfo',async(req,res)=>{
 
 })
 
+
+
+app.get('/editCompanyDetails',async(req,res)=>{
+
+    // const newCompanyDetails = new CompanyInfo(req.body);
+    const updatedCompanyDetail = await CompanyInfo.findOne({companyEmail: emailIdCompanyCarrier });
+    console.log(updatedCompanyDetail)
+    res.render('editCompany',{updatedCompanyDetail})
+
+})
+
 // View company page // Uncomment 3 
 // app.get('/viewCompanyInfo',async(req,res)=>{
 
@@ -202,19 +213,25 @@ app.post('/addCompanyInfo',async(req,res)=>{
 
 
 // Uncomment 6 
-app.put('/updateCompanyInfo', async (req, res) => {
+app.post('/updateCompanyInfo', async (req, res) => {
 
     const updatedData = req.body;  
     
       // Find the user by email and update it with the new data
-      const companyData = await CompanyInfo.findOneAndUpdate({ email: emailIdCompanyCarrier }, updatedData, { new: true });
+      const newCompanyDetails = await CompanyInfo.findOneAndUpdate({ companyEmail: emailIdCompanyCarrier }, updatedData, { new: true });
 
       // Send back the updated user data
-      return res.status(200).json({ message: 'Company updated successfully', companyData });
+    //   return res.status(200).json({ message: 'Company updated successfully', companyData });
+    res.render('viewCompanies',{newCompanyDetails})
     }
   );
 
 
+  app.get('/viewCompaniesFromStudent',async(req,res)=>{
+    // getting all the companies 
+    const companies = await Company.find({});
+    console.log("Company Details:", companies);
+  })
 
 // Uncomment 5 
 // Rooute for the student to register for a particular company 

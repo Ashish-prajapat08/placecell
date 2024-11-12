@@ -113,11 +113,11 @@ app.get('/view/studentProfile',async(req,res)=>{
 
 
 // We will render in all the companies here in the Company List section under the student login 
-app.get('/companyList',(req,res)=>{
-    // Here we will render in all the companies 
-    res.render('companyList')
+// app.get('/companyList',(req,res)=>{
+//     // Here we will render in all the companies 
+//     res.render('companyList')
 
-})
+// })
 
 
 // The one time use code for creating in the users and ids
@@ -301,36 +301,9 @@ app.post('/updateCompanyInfo', async (req, res) => {
         await newApplicationStatus.save();
 
         // const allApplicationStatus = await ApplicationDetails.find({});
-        const pendingApplications = await ApplicationDetails.find({ applicationStatus: "pending(Applied)" });
 
-        // Extract the companyEmail from each record into a new array
-        const pendingCompanyEmails = pendingApplications.map(record => record.companyEmail);
-
-        // vo emails h jo pending k andar h 
-        
-
-
-        // same for the rejected and shortlisted 
-        const shortListedApplications =  await ApplicationDetails.find({ applicationStatus: "ShortListed" });
-        const ShortListedCompanyEmails = shortListedApplications.map(record => record.companyEmail);
-
-
-        // Rejected 
-        const rejectedApplications = await ApplicationDetails.find({ applicationStatus: "Rejected" });
-        const rejectedCompanyEmails = rejectedApplications.map(record => record.companyEmail);
-
-        console.log(pendingApplications);        // Shows the filtered records with "pending(Applied)"
-        console.log(pendingCompanyEmails);       // Shows an array of companyEmail with "pending(Applied)"
-
-
-        const companies = await CompanyInfo.find({});
-
-        // console.log("all applcationsStatus")
-        // console.log(allApplicationStatus.)
-
-        res.render('appliedStatus',{companies,pendingCompanyEmails,emailIdCompanyCarrier,rejectedCompanyEmails,ShortListedCompanyEmails})
-
-
+        res.redirect('/appliedStatusInCompanies')
+     
 
          
 
@@ -338,6 +311,44 @@ app.post('/updateCompanyInfo', async (req, res) => {
   
 
     
+
+  })
+
+  app.get('/appliedStatusInCompanies',async(req,res)=>{
+       // vo record jaha pe applicationStatus pending h 
+       const pendingApplications = await ApplicationDetails.find({ 
+        applicationStatus: "pending(Applied)", 
+        studentEmail: emailIdCarrier 
+    });
+    
+
+    // Extract the companyEmail from each record into a new array
+    const pendingCompanyEmails = pendingApplications.map(record => record.companyEmail);
+
+    // vo emails h jo pending k andar h 
+
+
+
+    // same for the rejected and shortlisted 
+    const shortListedApplications =  await ApplicationDetails.find({ applicationStatus: "ShortListed", studentEmail: emailIdCarrier});
+    const shortListedCompanyEmails = shortListedApplications.map(record => record.companyEmail);
+
+
+    // Rejected 
+    const rejectedApplications = await ApplicationDetails.find({ applicationStatus: "Rejected" ,studentEmail: emailIdCarrier});
+    const rejectedCompanyEmails = rejectedApplications.map(record => record.companyEmail);
+
+    console.log(pendingApplications);        // Shows the filtered records with "pending(Applied)"
+    console.log(pendingCompanyEmails);       // Shows an array of companyEmail with "pending(Applied)"
+
+
+    const companies = await CompanyInfo.find({});
+
+    // console.log("all applcationsStatus")
+    // console.log(allApplicationStatus.)
+
+    res.render('appliedStatus',{companies,pendingCompanyEmails,emailIdCompanyCarrier,rejectedCompanyEmails,shortListedCompanyEmails})
+
 
   })
 
@@ -488,7 +499,7 @@ app.get('/applicationStatus',async(req,res)=>{
 
     // same for the rejected and shortlisted 
     const shortListedApplications =  await ApplicationDetails.find({ applicationStatus: "ShortListed" });
-    const ShortListedCompanyEmails = shortListedApplications.map(record => record.companyEmail);
+    const shortListedCompanyEmails = shortListedApplications.map(record => record.companyEmail);
 
 
     // Rejected 
@@ -504,7 +515,7 @@ app.get('/applicationStatus',async(req,res)=>{
     // console.log("all applcationsStatus")
     // console.log(allApplicationStatus.)
 
-    res.render('appliedStatus',{companies,pendingCompanyEmails,rejectedCompanyEmails,ShortListedCompanyEmails})
+    res.render('appliedStatus',{companies,pendingCompanyEmails,rejectedCompanyEmails,shortListedCompanyEmails})
 
 
 

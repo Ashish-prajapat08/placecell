@@ -41,12 +41,23 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/student/signUp',async(req,res)=>{
+    res.render('signUpStudent')
+   
+})
+
+app.post('/student/signUp',async(req,res)=>{
     const newStudent = new User(req.body);
     await newStudent.save();
     res.redirect('/loginStudent')
 })
 
 app.get('/company/signUp',async(req,res)=>{
+    res.render('signUpCompany')
+
+})
+
+
+app.post('/company/signUp',async(req,res)=>{
     const newCompany = new Company(req.body);
     await newCompany.save();
     res.redirect('/loginCompany');
@@ -85,32 +96,39 @@ app.post('/login/student',async(req,res)=>{
         return res.status(400).json({message: 'Wrong password'});
     }
 
-    const studentDetails = StudentDetails.findOne({email : emailIdCarrier});
+    const studentDetails = await StudentDetails.findOne({email : emailIdCarrier});
 
-    if(studentDetails){
-        res.redirect('/view/studentProfile')
+    console.log("Checking students details ")
+    console.log(studentDetails)
+
+    if(!studentDetails){
+
+          // yaha pe present h matlab ki auth and password verify ho gye h so 
+    // redirect krdo studentProfile k upar 
+    res.render('StudentProfile',{user})
+      
     }
 
     else{
 
-    // yaha pe present h matlab ki auth and password verify ho gye h so 
-    // redirect krdo studentProfile k upar 
-    res.render('studentProfile',{user})
+  
+
+    res.redirect('/view/studentProfile')
     }
 })
 
 
-app.post('/studentProfile',async(req,res)=>{
-    console.log(req.body);
+// app.post('/studentProfile',async(req,res)=>{
+//     console.log(req.body);
 
-    const student = new StudentDetails(req.body);
-    await student.save();
+//     const student = new StudentDetails(req.body);
+//     await student.save();
 
-//   res.send("Saving of the user is successfull")
+// //   res.send("Saving of the user is successfull")
 
 
-    res.send("Saved the student details successfully")
-})
+//     res.send("Saved the student details successfully")
+// })
 
 app.get('/view/studentProfile',async(req,res)=>{
 
@@ -123,6 +141,14 @@ app.get('/view/studentProfile',async(req,res)=>{
     // res.render('viewStudentProfile')
 })
 
+app.post('/updateStudentDetails',async(req,res)=>{
+    const updatedData = req.body;
+    const newStudentDetails = await StudentDetails.findOneAndUpdate({ email: emailIdCarrier }, updatedData, { new: true });
+
+    res.redirect('/view/studentProfile')
+  
+
+})
 
 // We will render in all the companies here in the Company List section under the student login 
 // app.get('/companyList',(req,res)=>{
@@ -210,6 +236,68 @@ app.get('/viewCompanyDetails',async(req,res)=>{
       // it means finding in the exisiting company just to keep the same name using it 
       const newCompanyDetails = await CompanyInfo.findOne({companyEmail: emailIdCompanyCarrier})
     res.render('viewCompanies',{newCompanyDetails}) 
+
+})
+
+
+// Hall of fame route to render in the hall of fame students
+app.get('/hallOfFame',async(req,res)=>{
+    try {
+        const results = await ApplicationDetails.aggregate([
+          // Match documents where applicationStatus is 'ShortListed'
+          { $match: { applicationStatus: 'ShortListed' } },
+    
+          // Lookup to get company details from the Company collection
+          {
+            $lookup: {
+              from: 'companies', 
+              localField: 'companyEmail',
+              foreignField: 'companyEmail',
+              as: 'companyDetails',
+            },
+          },
+    
+          
+          {
+            $lookup: {
+              from: 'students', 
+              localField: 'studentEmail',
+              foreignField: 'email',
+              as: 'studentDetails',
+            },
+          },
+    
+      
+          { $unwind: '$companyDetails' },
+          { $unwind: '$studentDetails' },
+    
+        
+          {
+            $project: {
+              _id: 0,
+              studentEmail: 1,
+              companyEmail: 1,
+              applicationStatus: 1,
+              companyName: '$companyDetails.companyName',
+              studentName: '$studentDetails.name',
+            },
+          },
+        ]);
+    
+        // Send the results in the response
+        res.status(200).json({
+          success: true,
+          data: results,
+        });
+      } catch (error) {
+        console.error('Error retrieving shortlisted applications:', error);
+        res.status(500).json({
+          success: false,
+          message: 'Failed to retrieve shortlisted applications',
+          error: error.message,
+        });
+      }
+
 
 })
 
@@ -491,6 +579,7 @@ app.get('/shortlist/:studentEmailFromButton/register/:companyEmailFromButton',as
        
 
        res.redirect('/appliedStudents')
+       
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');

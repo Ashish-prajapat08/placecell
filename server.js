@@ -40,6 +40,18 @@ app.get('/',(req,res)=>{
     res.render('Homepage.ejs')
 })
 
+app.get('/student/signUp',async(req,res)=>{
+    const newStudent = new User(req.body);
+    await newStudent.save();
+    res.redirect('/loginStudent')
+})
+
+app.get('/company/signUp',async(req,res)=>{
+    const newCompany = new Company(req.body);
+    await newCompany.save();
+    res.redirect('/loginCompany');
+
+})
 
 
 // Route 2
@@ -520,6 +532,8 @@ app.get('/applicationStatus',async(req,res)=>{
 
 
 })
+
+
 
 app.get('/reject/:studentEmailFromButton/register/:companyEmailFromButton', async (req, res) => {
     const { studentEmailFromButton, companyEmailFromButton } = req.params;

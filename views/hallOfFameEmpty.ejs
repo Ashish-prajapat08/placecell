@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall of Fame</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .student-card {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .student-info h3 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .student-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .empty-message {
+            text-align: center;
+            font-size: 16px;
+            color: #888;
+            padding: 50px 0;
+        }
+        .sidebar {
+      width: 200px;
+      background-color: #a8bdfa;
+      color: #ecf0f1;
+      padding-top: 20px;
+      position: fixed;
+      height: 100%;
+      margin-right: 500px;
+      border-radius: 20px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 15px;
+      color: #ecf0f1;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background-color:  #4ca3ff;
+      border-radius: 20px;
+    }
+    .sidebar ul {
+  list-style: none;
+  padding: 0; /* Optional: remove default padding if needed */
+}
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Hall of Fame</h1>
+    </div>
+    <aside class="sidebar">
+        <ul>
+          
+          <li><a href="addCompany.html">Add New Company</a></li>
+          <li><a href="viewCompanies.html">View Company</a></li>
+          <li><a href="StudentProfile.html">Student Profile</a></li>
+          <li><a href="appliedStudents.html">Applied Students</a></li>
+          <li><a href="#">Announcements</a></li>
+          <li><a href="../otherpages/developer.html">Developer</a></li>
+          <li><a href="../otherpages/contact.html">Contact Us</a></li>
+          <li><a href="../otherpages/hallOfFame.html">Hall of Fame</a></li>
+          <li><a href="../otherpages/Homepage.html">Log Out</a></li>
+        </ul>
+      </aside>
+    <div class="container">
+        <h2>Students Placed in Top Companies</h2>
+
+        <!-- Empty message, initially displayed when no students are placed -->
+        <div id="emptyMessage" class="empty-message">No students have been placed yet. Once a company approves a student, they will appear here!</div>
+
+        <!-- This section will show student cards dynamically once students are placed -->
+        <div id="studentList"></div>
+    </div>
+
+   
+</body>
+</html>

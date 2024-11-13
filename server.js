@@ -243,7 +243,7 @@ app.get('/viewCompanyDetails',async(req,res)=>{
 // Hall of fame route to render in the hall of fame students
 app.get('/hallOfFame',async(req,res)=>{
     try {
-        const results = await ApplicationDetails.aggregate([
+        const data = await ApplicationDetails.aggregate([
           // Match documents where applicationStatus is 'ShortListed'
           { $match: { applicationStatus: 'ShortListed' } },
     
@@ -283,12 +283,16 @@ app.get('/hallOfFame',async(req,res)=>{
             },
           },
         ]);
-    
-        // Send the results in the response
-        res.status(200).json({
-          success: true,
-          data: results,
-        });
+
+        if (data.length === 0) {
+            // If no shortlisted applications, render hallOfFameEmpty.ejs
+            return res.render('hallOfFameEmpty');
+          }
+
+
+        res.render('hallOfFame',{data})
+
+
       } catch (error) {
         console.error('Error retrieving shortlisted applications:', error);
         res.status(500).json({

@@ -18,6 +18,8 @@ const CompanyRecord = require('./models/companyRecord')
 const ApplicationDetails = require('./models/applicationStatus')
 // const CompanRecord = require('./models/companyRecord) // Uncomment 4 
 
+const PreDetails= require('./models/preDetails')
+
 
 //My unique id carrier jugaad 
 let emailIdCarrier = '';
@@ -71,6 +73,7 @@ app.get('/loginStudent',(req,res)=>{
     res.render('registerStudent.ejs')
 })
 
+
 // Route to handle the form data which is coming when we are registering the students 
 app.post('/login/student',async(req,res)=>{
     // res.send("Idhar hit ho gya h test!!!!")
@@ -94,6 +97,11 @@ app.post('/login/student',async(req,res)=>{
 
     if(req.body.password!==user.password){
         return res.status(400).json({message: 'Wrong password'});
+    }
+
+    const preDetailRecord = await PreDetails.findOne({computerCode})
+    if ( preDetailRecord){ 
+        res.render('preDetail',{user, preDetailRecord})
     }
 
     const studentDetails = await StudentDetails.findOne({email : emailIdCarrier});

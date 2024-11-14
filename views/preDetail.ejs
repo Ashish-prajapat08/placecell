@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Profile</title>
+  <style>
+ body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      background-color: #ebebeb;
+    }
+    /* Sidebar styling */
+    .sidebar {
+      width: 200px;
+      background-color: #a8bdfa;
+      color: #ecf0f1;
+      padding-top: 20px;
+      position: fixed;
+      height: 100%;
+      margin-right: 500px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 15px;
+      color: #ecf0f1;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background-color:  #4ca3ff;
+      border-radius: 20px;
+    }
+    /* Main content styling */
+    .main-content {
+      margin-left: 20px;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      border-radius: 30px;
+      margin-right: 20px;
+      background-color:white ;
+      /* width: calc(100% - 200px); */
+    }
+    .profile-container {
+  display: flex;
+  width: 500px;
+  height: 20%;
+  margin-left: 15%;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  justify-content: center; /* Added to center horizontally */
+  align-items: center; /* Added to center vertically */
+}
+    /* Profile image section */
+    .profile-image-section {
+  display: flex; /* Make it a flex container */
+  flex-direction: column; /* Arrange items vertically */
+  justify-content: center;
+  align-items: center;
+}
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      margin-bottom: 15px;
+     text-align: justify;
+     margin-top: 8px;
+      
+    }
+    .profile-image-section h2 {
+      font-size: 1.2em;
+      color: #34495e;
+    margin-left: 5px;
+    padding: 1px;
+    align-items: center;
+    }
+    /* Profile details section */
+    .profile-details {
+      width: 70%;
+      padding-left: 20px;
+    }
+    .profile-details label {
+      font-weight: bold;
+      color: #34495e;
+      display: block;
+      margin-top: 10px;
+    }
+    .profile-details input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .update-button {
+      background-color: #2980b9;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .update-button:hover {
+      background-color: #3498db;
+    }
+    .headd{
+    /* justify-content: center; */
+    /* margin-left: 30px; */
+      color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="studentProfile.html">Add Student</a>
+    <a href="/view/studentProfile">View Student</a>
+    <a href="/companyList">Company List</a>
+    <a href="/applicationStatus">Applied Status</a>
+    <a href="../otherpages/Homepage.html">Logout</a>
+  </div>
+
+  <div class="profile-container">
+    <div class="profile-image-section">
+      <img src="https://img.freepik.com/premium-vector/default-female-user-profile-icon-vector-illustration_276184-169.jpg" alt="Profile Image" class="profile-image">
+      <h2><%= preDetailRecord.name %></h2>
+      <h2><%= preDetailRecord.branch %></h2>
+      <h2><%= preDetailRecord.year %></h2>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="main-content">
+    <h2 class="headd">Student Profile</h2>
+    <form action="/studentProfile" method="post">
+      <div class="profile-details" id="profile">
+        <label>Name:</label>
+        <input type="text" id="name" name="name" value="<%= preDetailRecord.name %>" readonly>
+
+        <label>College ID:</label>
+        <input type="text" id="collegeId" name="collegeId" value="<%= user.computerCode %>" readonly>
+
+        <label>Degree:</label>
+        <input type="text" id="degree" name="degree" value="<%= preDetailRecord.degree %>" readonly>
+
+        <label>Branch:</label>
+        <input type="text" id="branch" name="branch" value="<%= preDetailRecord.branch %>" readonly >
+
+        <label>Email:</label>
+        <input type="email" id="email" name="email" value="<%= user.email %>" readonly>
+
+        <label>Contact:</label>
+        <input type="text" id="contact" name="contact">
+
+        <label>CGPA:</label>
+        <input type="text" id="cgpa" name="cgpa">
+
+        <label>Active Backlogs:</label>
+        <input type="text" id="backlogs" name="backlogs">
+
+        <label>10th Percentage:</label>
+        <input type="text" id="tenthPercentage" name="tenthPercentage">
+
+        <label>12th Percentage:</label>
+        <input type="text" id="twelfthPercentage" name="twelfthPercentage">
+
+        <label>10th Board:</label>
+        <input type="text" id="tenthBoard" name="tenthBoard">
+
+        <label>12th Board:</label>
+        <input type="text" id="twelfthBoard" name="twelfthBoard">
+
+        <label>Address:</label>
+        <input type="text" id="address" name="address">
+
+        <label>City:</label>
+        <input type="text" id="city" name="city">
+
+        <label>LinkedIn Profile:</label>
+        <input type="url" id="linkedinProfile" name="linkedinProfile">
+
+        <label>Resume URL:</label>
+        <input type="text" id="resume" name="resume" placeholder="Enter resume URL or path">
+
+        <button class="update-button" type="submit">Create Profile</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

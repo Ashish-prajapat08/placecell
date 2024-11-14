@@ -634,6 +634,14 @@ app.get('/applicationStatus',async(req,res)=>{
 
 })
 
+app.get('/logOut',(req,res)=>{
+     emailIdCarrier = '';
+     emailIdCompanyCarrier = '';
+
+     res.redirect('/')
+
+})
+
 
 
 app.get('/reject/:studentEmailFromButton/register/:companyEmailFromButton', async (req, res) => {

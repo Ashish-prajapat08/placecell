@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-module.exports = mongoose.connect('mongodb+srv://kushagrawal123321:FvYODmuCM4BwpfAy@ashhhcluster.n07iy.mongodb.net/?retryWrites=true&w=majority&appName=ashhhcluster')
+module.exports = mongoose.connect('mongodb://127.0.0.1:27017/AryPlaceCell')
 .then(()=>{
     console.log("Connection open for mongoose DB running successfully")
 })

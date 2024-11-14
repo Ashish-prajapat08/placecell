@@ -126,17 +126,17 @@ app.post('/login/student',async(req,res)=>{
 })
 
 
-// app.post('/studentProfile',async(req,res)=>{
-//     console.log(req.body);
+app.post('/studentProfile',async(req,res)=>{
+    console.log(req.body);
 
-//     const student = new StudentDetails(req.body);
-//     await student.save();
+    const student = new StudentDetails(req.body);
+    await student.save();
 
-// //   res.send("Saving of the user is successfull")
+//   res.send("Saving of the user is successfull")
 
 
-//     res.send("Saved the student details successfully")
-// })
+    res.send("Saved the student details successfully")
+})
 
 app.get('/view/studentProfile',async(req,res)=>{
 
